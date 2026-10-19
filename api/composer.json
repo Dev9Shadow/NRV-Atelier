@@ -4,14 +4,27 @@
     "type": "project",
     "require": {
         "php": "^8.2",
+        "ext-pdo": "*",
         "slim/slim": "^4.12",
         "slim/psr7": "^1.6",
         "php-di/php-di": "^7.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "phpunit/phpunit": "^10.5"
     },
     "autoload": {
         "psr-4": {
             "nrv\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "nrv\\tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
     },
     "minimum-stability": "stable"
 }
