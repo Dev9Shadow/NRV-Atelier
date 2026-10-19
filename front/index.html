@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Programme du festival Nancy Rock Vibration : tous les spectacles, filtrables par date et par style.">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="site-header__nav" aria-label="Navigation principale">
+            <ul>
+                <li><a href="index.html" aria-current="page">Programme</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="programme">
+        <h1 class="programme__titre">Programme du festival</h1>
+
+        <form class="filtres" id="filtres" aria-label="Filtrer les spectacles">
+            <div class="filtres__champ">
+                <label for="filtre-date">Date</label>
+                <select id="filtre-date" name="date">
+                    <option value="">Toutes les dates</option>
+                </select>
+            </div>
+            <div class="filtres__champ">
+                <label for="filtre-style">Style</label>
+                <select id="filtre-style" name="style">
+                    <option value="">Tous les styles</option>
+                </select>
+            </div>
+        </form>
+
+        <p class="programme__compteur" id="compteur" aria-live="polite"></p>
+
+        <section class="spectacles" id="spectacles" aria-label="Liste des spectacles">
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Nancy Rock Vibration</p>
+    </footer>
+</body>
+</html>
