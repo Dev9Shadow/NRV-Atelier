@@ -1,0 +1,38 @@
+services:
+  api:
+    image: php:8.2-apache
+    container_name: nrv_api
+    volumes:
+      - ./api:/var/www/html
+    ports:
+      - "55000:80"
+    restart: unless-stopped
+    command: >
+      bash -c "a2enmod rewrite &&
+               sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf &&
+               apache2-foreground"
+
+  front:
+    image: nginx:alpine
+    container_name: nrv_front
+    volumes:
+      - ./front:/usr/share/nginx/html
+    ports:
+      - "55001:80"
+    restart: unless-stopped
+
+  db:
+    image: postgres:15-alpine
+    container_name: nrv_db
+    environment:
+      POSTGRES_USER: nrv_user
+      POSTGRES_PASSWORD: nrv_password
+      POSTGRES_DB: nrv_db
+    restart: unless-stopped
+
+  adminer:
+    image: adminer
+    container_name: nrv_adminer
+    ports:
+      - "55002:8080"
+    restart: unless-stopped
