@@ -1,0 +1,121 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.soiree__retour {
+    display: inline-block;
+    margin-bottom: espace(l);
+    color: $couleur-texte-doux;
+    font-size: 0.9375rem;
+    text-decoration: none;
+
+    &:hover {
+        color: $couleur-texte;
+    }
+}
+
+.fiche-soiree {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+        "entete"
+        "billets"
+        "programme";
+    gap: espace(xl);
+
+    @include bp(lg) {
+        grid-template-columns: minmax(0, 1fr) 21.25rem;
+        grid-template-areas:
+            "entete entete"
+            "programme billets";
+        align-items: start;
+        column-gap: espace(xxl);
+    }
+
+    &__entete {
+        grid-area: entete;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: espace(s);
+
+        .titre-page {
+            margin-bottom: 0;
+        }
+    }
+
+    &__date {
+        font-size: 1.25rem;
+        font-weight: 700;
+    }
+
+    &__lieu {
+        font-size: 0.9375rem;
+        color: $couleur-texte-doux;
+    }
+
+    &__programme {
+        grid-area: programme;
+        display: flex;
+        flex-direction: column;
+        gap: espace(l);
+    }
+
+    &__sous-titre {
+        text-transform: uppercase;
+    }
+}
+
+.billets {
+    grid-area: billets;
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 1.25rem;
+    border: 1.5px solid $couleur-texte;
+    border-radius: $rayon;
+
+    @include bp(lg) {
+        position: sticky;
+        top: espace(l);
+    }
+
+    &__titre {
+        font-size: 1.5rem;
+        text-transform: uppercase;
+    }
+
+    &__tarifs {
+        display: flex;
+        flex-direction: column;
+        gap: 0.875rem;
+
+        div {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        dd {
+            margin: 0;
+            font-family: $police-titre;
+            font-size: 1.375rem;
+        }
+    }
+
+    &__note {
+        font-size: 0.8125rem;
+        line-height: 1.4;
+        color: $couleur-texte-doux;
+    }
+
+    &__places {
+        font-size: 0.875rem;
+        font-weight: 700;
+    }
+}
+
+.message {
+    padding: espace(l);
+    background: $couleur-surface;
+    border-radius: $rayon-petit;
+}

@@ -57,7 +57,9 @@
             {{/if}}
             <div class="carte__corps">
                 <span class="badge">{{spectacle.style}}</span>
-                <h2 class="carte__titre">{{spectacle.titre}}</h2>
+                <h2 class="carte__titre">
+                    <a class="carte__lien" href="soiree.html?id={{idDepuisLien links.soiree.href}}#spectacle-{{spectacle.id}}">{{spectacle.titre}}</a>
+                </h2>
                 <p class="carte__date">
                     <time datetime="{{spectacle.date}}T{{spectacle.horaire}}">{{dateLongue spectacle.date}} · {{spectacle.horaire}}</time>
                 </p>

@@ -2,12 +2,19 @@
 @use "../abstracts/mixins" as *;
 
 .carte {
+    position: relative;
     display: flex;
     flex-direction: column;
     overflow: hidden;
     background: $couleur-fond;
     border: 1px solid $couleur-trait;
     border-radius: $rayon;
+    transition: border-color $transition;
+
+    &:hover,
+    &:focus-within {
+        border-color: $couleur-texte;
+    }
 
     &__image {
         width: 100%;
@@ -28,6 +35,21 @@
 
     &__titre {
         font-size: 1.5rem;
+    }
+
+    &__lien {
+        color: inherit;
+        text-decoration: none;
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+        }
+
+        &:focus-visible {
+            outline: none;
+        }
     }
 
     &__date {

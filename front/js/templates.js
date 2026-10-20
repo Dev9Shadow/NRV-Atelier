@@ -1,4 +1,5 @@
 const cache = new Map();
+const formatPrix = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });
 
 Handlebars.registerHelper('dateLongue', (date) => {
     const texte = new Date(`${date}T00:00:00`).toLocaleDateString('fr-FR', {
@@ -8,6 +9,12 @@ Handlebars.registerHelper('dateLongue', (date) => {
     });
     return texte.charAt(0).toUpperCase() + texte.slice(1);
 });
+
+Handlebars.registerHelper('prix', (montant) => formatPrix.format(montant));
+
+Handlebars.registerHelper('liste', (valeurs) => valeurs.join(', '));
+
+Handlebars.registerHelper('idDepuisLien', (href) => href.split('/').pop());
 
 export function rendu(idTemplate, donnees) {
     if (!cache.has(idTemplate)) {
