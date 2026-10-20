@@ -1,0 +1,12 @@
+{
+    "name": "nrv-front",
+    "private": true,
+    "description": "Outils de build du front NRV.net (compilation Sass)",
+    "scripts": {
+        "sass": "sass front/scss/main.scss front/css/main.css --no-source-map",
+        "sass:watch": "sass front/scss/main.scss front/css/main.css --no-source-map --watch"
+    },
+    "devDependencies": {
+        "sass": "^1.106.0"
+    }
+}

@@ -1,0 +1,10 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.site-footer {
+    padding: espace(l) espace(m);
+    background: $couleur-surface;
+    color: $couleur-texte-doux;
+    font-size: 0.8125rem;
+    text-align: center;
+}

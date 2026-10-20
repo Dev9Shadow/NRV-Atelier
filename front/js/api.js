@@ -1,10 +1,5 @@
-// Accès aux données : un seul point d'entrée, getJSON(chemin),
-// qui interroge soit l'API, soit les mocks selon config.js.
-// Les chemins sont ceux de l'API (et des liens HATEOAS) : '/spectacles?date=…', '/soirees/1', '/styles'.
-
 import { API_BASE, USE_MOCKS } from './config.js';
 
-/** Erreur renvoyée par l'API au format { type: "error", code, message } */
 export class ApiError extends Error {
     constructor(code, message) {
         super(message);
@@ -31,8 +26,6 @@ async function getApi(chemin) {
     return data;
 }
 
-// ---------- Mocks : imitent les routes de l'API à partir des fichiers JSON ----------
-
 async function chargerMock(fichier) {
     const response = await fetch(`mocks/${fichier}`);
     if (!response.ok) {
@@ -57,7 +50,6 @@ async function getMock(chemin) {
     }
 }
 
-// Reproduit côté client les filtres ?date=, ?style= (id) et ?soiree= (id) de l'API
 async function filtrerSpectaclesMock(collection, params, chemin) {
     const date = params.get('date');
     const styleId = params.get('style');
