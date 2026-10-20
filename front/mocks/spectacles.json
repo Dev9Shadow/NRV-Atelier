@@ -1,0 +1,137 @@
+{
+  "type": "collection",
+  "count": 7,
+  "spectacles": [
+    {
+      "spectacle": {
+        "id": 1,
+        "titre": "Voluptatibus Veritatis",
+        "date": "2027-07-01",
+        "horaire": "21:00",
+        "image": "https://picsum.photos/seed/nrv-1-1/800/500",
+        "style": "Métal"
+      },
+      "links": {
+        "self": {
+          "href": "/spectacles/1"
+        },
+        "soiree": {
+          "href": "/soirees/1"
+        }
+      }
+    },
+    {
+      "spectacle": {
+        "id": 2,
+        "titre": "Iure Consectetur",
+        "date": "2027-07-01",
+        "horaire": "22:15",
+        "image": "https://picsum.photos/seed/nrv-2-1/800/500",
+        "style": "Hard rock"
+      },
+      "links": {
+        "self": {
+          "href": "/spectacles/2"
+        },
+        "soiree": {
+          "href": "/soirees/1"
+        }
+      }
+    },
+    {
+      "spectacle": {
+        "id": 3,
+        "titre": "Eos Sit",
+        "date": "2027-07-01",
+        "horaire": "23:30",
+        "image": "https://picsum.photos/seed/nrv-3-1/800/500",
+        "style": "Métal"
+      },
+      "links": {
+        "self": {
+          "href": "/spectacles/3"
+        },
+        "soiree": {
+          "href": "/soirees/1"
+        }
+      }
+    },
+    {
+      "spectacle": {
+        "id": 4,
+        "titre": "Ut Non Autem",
+        "date": "2027-07-02",
+        "horaire": "19:30",
+        "image": "https://picsum.photos/seed/nrv-4-1/800/500",
+        "style": "Hard rock"
+      },
+      "links": {
+        "self": {
+          "href": "/spectacles/4"
+        },
+        "soiree": {
+          "href": "/soirees/2"
+        }
+      }
+    },
+    {
+      "spectacle": {
+        "id": 5,
+        "titre": "Architecto",
+        "date": "2027-07-02",
+        "horaire": "20:45",
+        "image": "https://picsum.photos/seed/nrv-5-1/800/500",
+        "style": "Hard rock"
+      },
+      "links": {
+        "self": {
+          "href": "/spectacles/5"
+        },
+        "soiree": {
+          "href": "/soirees/2"
+        }
+      }
+    },
+    {
+      "spectacle": {
+        "id": 6,
+        "titre": "Ea Est Consectetur",
+        "date": "2027-07-03",
+        "horaire": "19:30",
+        "image": "https://picsum.photos/seed/nrv-6-1/800/500",
+        "style": "Blues rock"
+      },
+      "links": {
+        "self": {
+          "href": "/spectacles/6"
+        },
+        "soiree": {
+          "href": "/soirees/3"
+        }
+      }
+    },
+    {
+      "spectacle": {
+        "id": 7,
+        "titre": "Voluptates",
+        "date": "2027-07-03",
+        "horaire": "20:45",
+        "image": "https://picsum.photos/seed/nrv-7-1/800/500",
+        "style": "Blues rock"
+      },
+      "links": {
+        "self": {
+          "href": "/spectacles/7"
+        },
+        "soiree": {
+          "href": "/soirees/3"
+        }
+      }
+    }
+  ],
+  "links": {
+    "self": {
+      "href": "/spectacles"
+    }
+  }
+}

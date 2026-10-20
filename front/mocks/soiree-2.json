@@ -1,0 +1,60 @@
+{
+  "type": "resource",
+  "soiree": {
+    "id": 2,
+    "nom": "Nuit Hard rock #2",
+    "thematique": "Hard rock",
+    "date": "2027-07-02",
+    "horaire": "19:00",
+    "lieu": {
+      "id": 2,
+      "nom": "Salle Poirel",
+      "adresse": "3 rue Victor Poirel, 54000 Nancy"
+    },
+    "tarifs": {
+      "normal": 35.0,
+      "reduit": 25.0
+    },
+    "placesRestantes": 417,
+    "spectacles": [
+      {
+        "id": 4,
+        "titre": "Ut Non Autem",
+        "artistes": [
+          "Ut Non Autem"
+        ],
+        "description": "Quidem facilis quis incidunt cupiditate voluptatem. Accusantium id quia doloribus quo magni. A dolorum et voluptatum et.",
+        "style": "Hard rock",
+        "video": "https://www.youtube.com/watch?v=jeDrTlwynmF",
+        "horaire": "19:30",
+        "images": [
+          "https://picsum.photos/seed/nrv-4-1/800/500",
+          "https://picsum.photos/seed/nrv-4-2/800/500"
+        ]
+      },
+      {
+        "id": 5,
+        "titre": "Architecto",
+        "artistes": [
+          "Architecto",
+          "Martin Le Gimenez"
+        ],
+        "description": "Accusamus quisquam dolor vero eos enim velit consequatur. Voluptatem at corrupti voluptas perspiciatis itaque ea vel. Quam cumque veritatis qui dolorem expedita voluptatem expedita voluptatum. Est dignissimos quia unde et asperiores saepe. Voluptatem repudiandae et deleniti autem.",
+        "style": "Hard rock",
+        "video": "https://www.youtube.com/watch?v=MSiTFhu84c2",
+        "horaire": "20:45",
+        "images": [
+          "https://picsum.photos/seed/nrv-5-1/800/500"
+        ]
+      }
+    ]
+  },
+  "links": {
+    "self": {
+      "href": "/soirees/2"
+    },
+    "spectacles": {
+      "href": "/spectacles?soiree=2"
+    }
+  }
+}

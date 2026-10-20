@@ -1,0 +1,37 @@
+{
+  "type": "collection",
+  "styles": [
+    {
+      "id": 1,
+      "libelle": "Blues rock"
+    },
+    {
+      "id": 8,
+      "libelle": "Grunge"
+    },
+    {
+      "id": 4,
+      "libelle": "Hard rock"
+    },
+    {
+      "id": 2,
+      "libelle": "Métal"
+    },
+    {
+      "id": 6,
+      "libelle": "Pop rock"
+    },
+    {
+      "id": 5,
+      "libelle": "Punk"
+    },
+    {
+      "id": 3,
+      "libelle": "Rock"
+    },
+    {
+      "id": 7,
+      "libelle": "Rock psyché"
+    }
+  ]
+}
