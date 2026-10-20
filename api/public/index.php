@@ -9,10 +9,17 @@ require __DIR__ . '/../vendor/autoload.php';
 // 1. Initialisation de Slim avec PHP-DI
 $container = new Container();
 
-// Enregistrement explicite pour garantir l'injection du ServiceCatalogue
-$container->set(\nrv\core\application\usecases\ServiceCatalogue::class, function() {
-    return new \nrv\core\application\usecases\ServiceCatalogue();
-});
+// Base de données + repositories (couche infrastructure)
+$container->set(\PDO::class, fn() => \nrv\infrastructure\repositories\PDOFactory::create());
+$container->set(\nrv\core\application\ports\SpectacleRepositoryInterface::class,
+    \DI\autowire(\nrv\infrastructure\repositories\PDOSpectacleRepository::class));
+$container->set(\nrv\core\application\ports\SoireeRepositoryInterface::class,
+    \DI\autowire(\nrv\infrastructure\repositories\PDOSoireeRepository::class));
+$container->set(\nrv\core\application\ports\StyleRepositoryInterface::class,
+    \DI\autowire(\nrv\infrastructure\repositories\PDOStyleRepository::class));
+$container->set(\nrv\core\application\ports\TarifRepositoryInterface::class,
+    \DI\autowire(\nrv\infrastructure\repositories\PDOTarifRepository::class));
+// ServiceCatalogue : ses 4 repositories sont injectés automatiquement
 
 AppFactory::setContainer($container);
 $app = AppFactory::create();

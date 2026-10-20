@@ -1,14 +1,24 @@
 services:
   api:
-    image: php:8.2-apache
+    build: ./api
     container_name: nrv_api
     volumes:
       - ./api:/var/www/html
+      - ./sql:/var/www/sql
     ports:
       - "55000:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: nrv_db
+      DB_USER: nrv_user
+      DB_PASSWORD: nrv_password
+    depends_on:
+      - db
     restart: unless-stopped
     command: >
-      bash -c "a2enmod rewrite &&
+      bash -c "composer install --no-interaction &&
+               a2enmod rewrite &&
                sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf &&
                apache2-foreground"
 
@@ -28,6 +38,11 @@ services:
       POSTGRES_USER: nrv_user
       POSTGRES_PASSWORD: nrv_password
       POSTGRES_DB: nrv_db
+    volumes:
+      # Exécutés une seule fois, au premier démarrage (volume vide)
+      - ./sql/nrv.schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./sql/nrv.data.sql:/docker-entrypoint-initdb.d/02-data.sql:ro
+      - nrv_db_data:/var/lib/postgresql/data
     restart: unless-stopped
 
   adminer:
@@ -36,3 +51,6 @@ services:
     ports:
       - "55002:8080"
     restart: unless-stopped
+
+volumes:
+  nrv_db_data:
