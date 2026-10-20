@@ -1,0 +1,10 @@
+api/vendor/
+.env
+.env.*
+!.env.example
+*.log
+api/logs/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
