@@ -40,3 +40,15 @@
     margin: 0;
     padding: 0;
 }
+
+@mixin grille-adaptative($colonnes, $gap: espace(l)) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: $gap;
+
+    @each $nom, $nombre in $colonnes {
+        @include bp($nom) {
+            grid-template-columns: repeat($nombre, minmax(0, 1fr));
+        }
+    }
+}

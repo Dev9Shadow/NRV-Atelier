@@ -47,5 +47,25 @@
     <footer class="site-footer">
         <p>Nancy Rock Vibration</p>
     </footer>
+    <script id="tpl-spectacles" type="text/x-handlebars-template">
+        {{#each spectacles}}
+        <article class="carte">
+            {{#if spectacle.image}}
+            <img class="carte__image" src="{{spectacle.image}}" alt="" width="800" height="500" loading="lazy">
+            {{else}}
+            <div class="carte__image"></div>
+            {{/if}}
+            <div class="carte__corps">
+                <span class="badge">{{spectacle.style}}</span>
+                <h2 class="carte__titre">{{spectacle.titre}}</h2>
+                <p class="carte__date">
+                    <time datetime="{{spectacle.date}}T{{spectacle.horaire}}">{{dateLongue spectacle.date}} · {{spectacle.horaire}}</time>
+                </p>
+            </div>
+        </article>
+        {{/each}}
+    </script>
+    <script src="js/lib/handlebars.min.js"></script>
+    <script type="module" src="js/programme.js"></script>
 </body>
 </html>
