@@ -1,0 +1,22 @@
+{
+    "name": "nrv/api",
+    "description": "API pour le projet NRV",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "slim/slim": "^4.12",
+        "slim/psr7": "^1.6",
+        "php-di/php-di": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "nrv\\api\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Romain"
+        }
+    ],
+    "minimum-stability": "stable"
+}
