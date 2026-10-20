@@ -31,14 +31,14 @@
                 </select>
             </div>
             <div class="filtres__champ">
-                <label for="filtre-style">Style</label>
+                <label for="filtre-style">Style de musique</label>
                 <select id="filtre-style" name="style">
                     <option value="">Tous les styles</option>
                 </select>
             </div>
+            <button class="bouton bouton--secondaire" type="reset">Réinitialiser</button>
+            <p class="filtres__compteur" id="compteur" aria-live="polite"></p>
         </form>
-
-        <p class="programme__compteur" id="compteur" aria-live="polite"></p>
 
         <section class="spectacles" id="spectacles" aria-label="Liste des spectacles">
         </section>
@@ -63,6 +63,16 @@
                 </p>
             </div>
         </article>
+        {{/each}}
+    </script>
+    <script id="tpl-dates" type="text/x-handlebars-template">
+        {{#each dates}}
+        <option value="{{this}}">{{dateLongue this}}</option>
+        {{/each}}
+    </script>
+    <script id="tpl-styles" type="text/x-handlebars-template">
+        {{#each styles}}
+        <option value="{{id}}">{{libelle}}</option>
         {{/each}}
     </script>
     <script src="js/lib/handlebars.min.js"></script>
