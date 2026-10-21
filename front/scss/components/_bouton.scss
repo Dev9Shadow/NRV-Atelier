@@ -1,0 +1,27 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.bouton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0 espace(m);
+    border: 1.5px solid $couleur-texte;
+    border-radius: $rayon-petit;
+    background: $couleur-texte;
+    color: $couleur-fond;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background $transition, color $transition;
+    @include focus-visible;
+
+    &--secondaire {
+        background: $couleur-fond;
+        color: $couleur-texte;
+
+        &:hover {
+            background: $couleur-surface;
+        }
+    }
+}

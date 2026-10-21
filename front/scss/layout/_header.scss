@@ -1,0 +1,49 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.site-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: espace(s) espace(xl);
+    padding: espace(m);
+    background: $couleur-fond;
+    border-bottom: 1px solid $couleur-trait;
+
+    @include bp(md) {
+        padding: 1.25rem espace(xxl);
+    }
+
+    &__logo {
+        font-family: $police-titre;
+        font-size: 1.5rem;
+        line-height: 1;
+        color: $couleur-texte;
+        text-decoration: none;
+
+        @include bp(md) {
+            font-size: 1.875rem;
+        }
+    }
+
+    &__nav ul {
+        @include liste-nue;
+        display: flex;
+        gap: espace(xl);
+    }
+
+    &__nav a {
+        display: inline-block;
+        padding-block: espace(s);
+        color: $couleur-texte;
+        font-weight: 600;
+        text-decoration: none;
+
+        &:hover,
+        &[aria-current="page"] {
+            text-decoration: underline;
+            text-underline-offset: 0.3em;
+        }
+    }
+}

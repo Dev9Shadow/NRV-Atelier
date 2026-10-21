@@ -1,0 +1,60 @@
+{
+  "type": "resource",
+  "soiree": {
+    "id": 3,
+    "nom": "Nuit Blues rock #3",
+    "thematique": "Blues rock",
+    "date": "2027-07-03",
+    "horaire": "19:00",
+    "lieu": {
+      "id": 3,
+      "nom": "La Manufacture",
+      "adresse": "10 rue Baron Louis, 54000 Nancy"
+    },
+    "tarifs": {
+      "normal": 35.0,
+      "reduit": 25.0
+    },
+    "placesRestantes": 185,
+    "spectacles": [
+      {
+        "id": 6,
+        "titre": "Ea Est Consectetur",
+        "artistes": [
+          "Ea Est Consectetur"
+        ],
+        "description": "Quam id suscipit commodi nihil dolores officiis omnis. Perferendis nisi rerum accusantium unde adipisci laudantium ut. Eveniet non eveniet voluptates saepe. Mollitia vero impedit autem et.",
+        "style": "Blues rock",
+        "video": "https://www.youtube.com/watch?v=34KW3eUiNET",
+        "horaire": "19:30",
+        "images": [
+          "https://picsum.photos/seed/nrv-6-1/800/500"
+        ]
+      },
+      {
+        "id": 7,
+        "titre": "Voluptates",
+        "artistes": [
+          "Voluptates",
+          "Patricia de la Lacroix"
+        ],
+        "description": "Necessitatibus quo aut pariatur sunt error. Dolor praesentium ratione ipsam assumenda voluptatem aperiam perspiciatis accusantium. Et ducimus non aliquam excepturi. Pariatur accusantium assumenda aspernatur autem. Alias facilis debitis omnis.",
+        "style": "Blues rock",
+        "video": "https://www.youtube.com/watch?v=OYFcROLvHg0",
+        "horaire": "20:45",
+        "images": [
+          "https://picsum.photos/seed/nrv-7-1/800/500",
+          "https://picsum.photos/seed/nrv-7-2/800/500"
+        ]
+      }
+    ]
+  },
+  "links": {
+    "self": {
+      "href": "/soirees/3"
+    },
+    "spectacles": {
+      "href": "/spectacles?soiree=3"
+    }
+  }
+}

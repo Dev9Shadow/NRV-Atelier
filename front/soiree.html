@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Soirée — NRV.net</title>
+    <meta name="description" content="Détail d'une soirée du festival Nancy Rock Vibration : lieu, tarifs et spectacles.">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="site-header__logo" href="index.html">NRV.net</a>
+        <nav class="site-header__nav" aria-label="Navigation principale">
+            <ul>
+                <li><a href="index.html">Programme</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="soiree" id="soiree">
+        <a class="soiree__retour" href="index.html">← Retour au programme</a>
+        <div id="fiche"></div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Nancy Rock Vibration</p>
+    </footer>
+    <script id="tpl-soiree" type="text/x-handlebars-template">
+        <article class="fiche-soiree">
+            <header class="fiche-soiree__entete">
+                <span class="badge">{{thematique}}</span>
+                <h1 class="titre-page">{{nom}}</h1>
+                <p class="fiche-soiree__date">
+                    <time datetime="{{date}}T{{horaire}}">{{dateLongue date}} · {{horaire}}</time>
+                </p>
+                <p class="fiche-soiree__lieu">{{lieu.nom}}, {{lieu.adresse}}</p>
+            </header>
+
+            <aside class="billets" aria-labelledby="titre-billets">
+                <h2 class="billets__titre" id="titre-billets">Billets</h2>
+                <dl class="billets__tarifs">
+                    <div>
+                        <dt>Tarif normal</dt>
+                        <dd>{{prix tarifs.normal}}</dd>
+                    </div>
+                    <div>
+                        <dt>Tarif réduit</dt>
+                        <dd>{{prix tarifs.reduit}}</dd>
+                    </div>
+                </dl>
+                <p class="billets__note">Réduit : étudiants, demandeurs d'emploi, personnes en situation de handicap. Pass 3 jours : −3 %.</p>
+                <p class="billets__places">{{placesRestantes}} places restantes</p>
+            </aside>
+
+            <section class="fiche-soiree__programme" aria-labelledby="titre-programme">
+                <h2 class="fiche-soiree__sous-titre" id="titre-programme">Au programme</h2>
+                {{#each spectacles}}
+                <article class="bloc-spectacle" id="spectacle-{{id}}">
+                    <div class="galerie">
+                        {{#each images}}
+                        <img src="{{this}}" alt="Photo de {{../titre}}" width="800" height="500" loading="lazy">
+                        {{/each}}
+                    </div>
+                    <div class="bloc-spectacle__infos">
+                        <p class="bloc-spectacle__meta">
+                            <time>{{horaire}}</time>
+                            <span class="badge">{{style}}</span>
+                        </p>
+                        <h3 class="bloc-spectacle__titre">{{titre}}</h3>
+                        <p class="bloc-spectacle__artistes">{{liste artistes}}</p>
+                        <p class="bloc-spectacle__description">{{description}}</p>
+                        {{#if video}}
+                        <a class="bouton bouton--secondaire" href="{{video}}" target="_blank" rel="noopener">▶ Voir la vidéo</a>
+                        {{/if}}
+                    </div>
+                </article>
+                {{/each}}
+            </section>
+        </article>
+    </script>
+    <script src="js/lib/handlebars.min.js"></script>
+    <script type="module" src="js/soiree.js"></script>
+</body>
+</html>

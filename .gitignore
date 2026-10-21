@@ -8,3 +8,4 @@ api/logs/
 Thumbs.db
 .vscode/
 .idea/
+node_modules/

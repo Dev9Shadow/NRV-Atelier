@@ -1,0 +1,61 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.filtres {
+    display: flex;
+    flex-direction: column;
+    gap: espace(m);
+    margin-bottom: espace(l);
+    padding: espace(m);
+    background: $couleur-surface;
+    border-radius: $rayon-petit;
+
+    @include bp(sm) {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        padding: espace(l) espace(m);
+    }
+
+    &__champ {
+        display: flex;
+        flex-direction: column;
+        gap: espace(xs);
+
+        @include bp(sm) {
+            flex: 0 1 11rem;
+        }
+
+        label {
+            font-size: 0.8125rem;
+            font-weight: 600;
+        }
+
+        select {
+            min-height: 2.75rem;
+            padding: 0 espace(s);
+            border: 1px solid $couleur-trait;
+            border-radius: $rayon-petit;
+            background: $couleur-fond;
+            color: $couleur-texte;
+            @include focus-visible;
+        }
+    }
+
+    .bouton {
+        align-self: flex-start;
+
+        @include bp(sm) {
+            align-self: auto;
+        }
+    }
+
+    &__compteur {
+        font-size: 0.8125rem;
+        color: $couleur-texte-doux;
+
+        @include bp(sm) {
+            margin-left: auto;
+        }
+    }
+}

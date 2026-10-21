@@ -1,0 +1,23 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.spectacles {
+    @include grille-adaptative((sm: 2, md: 3, lg: 4));
+
+    @include bp(lg) {
+        > .carte:first-child {
+            grid-column: span 2;
+            grid-row: span 2;
+
+            .carte__image {
+                flex: 1 1 0;
+                min-height: 0;
+                aspect-ratio: auto;
+            }
+
+            .carte__titre {
+                font-size: 2.5rem;
+            }
+        }
+    }
+}

@@ -1,0 +1,77 @@
+{
+  "type": "resource",
+  "soiree": {
+    "id": 1,
+    "nom": "Nuit Métal #1",
+    "thematique": "Métal",
+    "date": "2027-07-01",
+    "horaire": "20:30",
+    "lieu": {
+      "id": 1,
+      "nom": "L'Autre Canal",
+      "adresse": "45 boulevard d'Austrasie, 54000 Nancy"
+    },
+    "tarifs": {
+      "normal": 35.0,
+      "reduit": 25.0
+    },
+    "placesRestantes": 848,
+    "spectacles": [
+      {
+        "id": 1,
+        "titre": "Voluptatibus Veritatis",
+        "artistes": [
+          "Voluptatibus Veritatis",
+          "Arthur Techer-Guyot",
+          "Isaac-François Michaud"
+        ],
+        "description": "Qui vel voluptate commodi incidunt vel et in. Eius adipisci tenetur dolorum aspernatur facere possimus. Praesentium quis provident molestiae assumenda error.",
+        "style": "Métal",
+        "video": "https://www.youtube.com/watch?v=o5YfwQVJRl-",
+        "horaire": "21:00",
+        "images": [
+          "https://picsum.photos/seed/nrv-1-1/800/500",
+          "https://picsum.photos/seed/nrv-1-2/800/500"
+        ]
+      },
+      {
+        "id": 2,
+        "titre": "Iure Consectetur",
+        "artistes": [
+          "Iure Consectetur"
+        ],
+        "description": "Sunt ut est quia aperiam assumenda. Fuga doloribus non ea adipisci. Reprehenderit inventore dolorem assumenda non est ut.",
+        "style": "Hard rock",
+        "video": "https://www.youtube.com/watch?v=aYKgDGBS3A5",
+        "horaire": "22:15",
+        "images": [
+          "https://picsum.photos/seed/nrv-2-1/800/500",
+          "https://picsum.photos/seed/nrv-2-2/800/500"
+        ]
+      },
+      {
+        "id": 3,
+        "titre": "Eos Sit",
+        "artistes": [
+          "Eos Sit",
+          "Renée Millet-Imbert"
+        ],
+        "description": "Pariatur quod autem voluptates modi vel id illum id. Molestias et ut distinctio qui assumenda ut est. Eveniet ipsum porro repellat eos ab reprehenderit.",
+        "style": "Métal",
+        "video": "https://www.youtube.com/watch?v=xBJ-AonQY3J",
+        "horaire": "23:30",
+        "images": [
+          "https://picsum.photos/seed/nrv-3-1/800/500"
+        ]
+      }
+    ]
+  },
+  "links": {
+    "self": {
+      "href": "/soirees/1"
+    },
+    "spectacles": {
+      "href": "/spectacles?soiree=1"
+    }
+  }
+}

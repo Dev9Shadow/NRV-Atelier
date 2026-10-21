@@ -1,0 +1,32 @@
+$couleur-fond: #ffffff;
+$couleur-surface: #f2f2f2;
+$couleur-trait: #c9c9c9;
+$couleur-texte: #1a1a1a;
+$couleur-texte-doux: #6b6b6b;
+$couleur-accent: $couleur-texte;
+
+$police-texte: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$police-titre: Impact, "Arial Narrow Bold", sans-serif;
+$taille-texte: 1rem;
+$hauteur-ligne: 1.5;
+
+$espaces: (
+    xs: 0.25rem,
+    s: 0.5rem,
+    m: 1rem,
+    l: 1.5rem,
+    xl: 2rem,
+    xxl: 3rem,
+);
+
+$largeur-max: 75rem;
+$rayon: 0.5rem;
+$rayon-petit: 0.25rem;
+$transition: 0.2s ease;
+
+$breakpoints: (
+    sm: 40rem,
+    md: 48rem,
+    lg: 64rem,
+    xl: 80rem,
+);

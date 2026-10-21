@@ -1,0 +1,25 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.programme,
+.soiree {
+    @include conteneur;
+    padding-block: espace(l) espace(xxl);
+
+    @include bp(md) {
+        padding-block: espace(xxl);
+    }
+}
+
+.surtitre {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $couleur-texte-doux;
+}
+
+.titre-page {
+    text-transform: uppercase;
+    margin-bottom: espace(l);
+}
