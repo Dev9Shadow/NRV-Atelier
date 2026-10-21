@@ -1,0 +1,73 @@
+classDiagram
+  direction LR
+  class Soiree {
+    nom : string
+    thematique : string
+    date : date
+    heureDebut : time
+    nbPlacesTotal : int
+    nbPlacesVendues : int
+    placesRestantes() int
+  }
+  class Spectacle {
+    titre : string
+    description : text
+    urlVideo : string
+    horairePrevisionnel : time
+  }
+  class Lieu {
+    nom : string
+    adresse : string
+    capacite : int
+  }
+  class Style {
+    libelle : string
+  }
+  class Artiste {
+    nom : string
+  }
+  class Image {
+    url : string
+  }
+  class Tarif {
+    categorie : NORMAL | REDUIT
+    prix : decimal
+    prixPass3Jours() decimal
+  }
+  class Utilisateur {
+    email : string
+    passwordHash : string
+    nom : string
+    prenom : string
+    role : USER | ADMIN
+  }
+  class Commande {
+    statut : PANIER | VALIDEE | PAYEE
+    dateCreation : datetime
+    montantTotal() decimal
+  }
+  class LigneCommande {
+    typeBillet : SIMPLE | PASS_3J
+    categorie : NORMAL | REDUIT
+    quantite : int
+    prixUnitaire : decimal
+  }
+  class Billet {
+    reference : string
+    token : string
+    typeBillet : SIMPLE | PASS_3J
+    categorie : NORMAL | REDUIT
+    prix : decimal
+  }
+
+  Soiree "1" -- "2..3" Spectacle : programme
+  Soiree "*" -- "1" Lieu : se déroule à
+  Spectacle "*" -- "1" Style : a pour style
+  Spectacle "*" -- "1..*" Artiste : joué par
+  Spectacle "1" *-- "1..*" Image : illustré par
+  Utilisateur "1" -- "*" Commande : passe
+  Commande "1" *-- "*" LigneCommande : contient
+  LigneCommande "*" -- "1..3" Soiree : porte sur
+  Commande "1" -- "*" Billet : génère au paiement
+  Billet "*" -- "1..3" Soiree : donne accès à
+  LigneCommande ..> Tarif : prix calculé depuis
