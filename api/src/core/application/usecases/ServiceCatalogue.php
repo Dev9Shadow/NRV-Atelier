@@ -1,11 +1,11 @@
 <?php
-namespace Nrv\core\application\usecases;
+namespace nrv\core\application\usecases;
 
 class ServiceCatalogue {
     // Plus tard, on injectera les interfaces de Erdal ici via le constructeur
 
     public function listerSpectacles(array $filtres): array {
-        // Mock de données pour débloquer le front (Étape de 11h45)
+        // Mock de données pour débloquer le front
         return [
             [
                 "id" => 1,

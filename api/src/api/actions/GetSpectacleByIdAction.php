@@ -1,9 +1,8 @@
 <?php
-namespace Nrv\api\actions;
-
+namespace nrv\api\actions;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Nrv\core\application\usecases\ServiceCatalogue;
+use nrv\core\application\usecases\ServiceCatalogue;
 
 class GetSpectacleByIdAction {
     private ServiceCatalogue $catalogue;

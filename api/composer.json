@@ -10,13 +10,8 @@
     },
     "autoload": {
         "psr-4": {
-            "nrv\\api\\": "src/"
+            "nrv\\": "src/"
         }
     },
-    "authors": [
-        {
-            "name": "Romain"
-        }
-    ],
     "minimum-stability": "stable"
 }

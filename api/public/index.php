@@ -8,13 +8,19 @@ require __DIR__ . '/../vendor/autoload.php';
 
 // 1. Initialisation de Slim avec PHP-DI
 $container = new Container();
+
+// Enregistrement explicite pour garantir l'injection du ServiceCatalogue
+$container->set(\nrv\core\application\usecases\ServiceCatalogue::class, function() {
+    return new \nrv\core\application\usecases\ServiceCatalogue();
+});
+
 AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
 
-// 2. Middleware CORS (Autorise le front d'Eliot à faire des fetch)
+// 2. Middleware CORS (Autorise le front à faire des fetch)
 $app->add(function (Request $request, $handler) {
     $response = $handler->handle($request);
     return $response
@@ -52,10 +58,10 @@ $app->get('/', function (Request $request, Response $response) {
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-// Les routes
-$app->get('/spectacles', \Nrv\api\actions\GetSpectaclesAction::class);
-$app->get('/spectacles/{id}', \Nrv\api\actions\GetSpectacleByIdAction::class);
-$app->get('/soirees/{id}', \Nrv\api\actions\GetSoireeByIdAction::class);
-$app->get('/styles', \Nrv\api\actions\GetStylesAction::class);
+// Les routes de l'API
+$app->get('/spectacles', \nrv\api\actions\GetSpectaclesAction::class);
+$app->get('/spectacles/{id}', \nrv\api\actions\GetSpectacleByIdAction::class);
+$app->get('/soirees/{id}', \nrv\api\actions\GetSoireeByIdAction::class);
+$app->get('/styles', \nrv\api\actions\GetStylesAction::class);
 
 $app->run();
