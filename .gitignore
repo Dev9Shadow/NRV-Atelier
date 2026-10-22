@@ -1,4 +1,5 @@
 api/vendor/
+vendor/
 .env
 .env.*
 !.env.example
