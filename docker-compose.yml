@@ -13,6 +13,8 @@ services:
       DB_NAME: nrv_db
       DB_USER: nrv_user
       DB_PASSWORD: nrv_password
+      APP_DEBUG: "true"
+      JWT_SECRET: "7f9c8b2a4e1d6f0c3b8a5e9f2d1c4b7a0e3f6c9d8b2a1e4f7c0d3b6a9f2e5c8d"
     depends_on:
       - db
     restart: unless-stopped
