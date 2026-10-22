@@ -9,6 +9,8 @@ use nrv\core\domain\exceptions\ValidationException;
 use nrv\core\domain\exceptions\NonAuthentifieException;
 use nrv\core\domain\exceptions\AccesInterditException;
 use nrv\core\domain\exceptions\EntityNotFoundException; 
+use nrv\core\domain\exceptions\PlacesInsuffisantesException;
+use nrv\core\domain\exceptions\TransitionStatutException;
 
 class JsonErrorHandler
 {
@@ -42,6 +44,9 @@ class JsonErrorHandler
             $message = $exception->getMessage();
         } elseif ($exception instanceof EntityNotFoundException) {
             $statusCode = 404;
+            $message = $exception->getMessage();
+        } elseif ($exception instanceof PlacesInsuffisantesException || $exception instanceof TransitionStatutException) {
+            $statusCode = 409;
             $message = $exception->getMessage();
         } elseif ($exception instanceof HttpException) {
             $statusCode = $exception->getCode();
