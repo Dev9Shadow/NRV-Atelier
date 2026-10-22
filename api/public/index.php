@@ -1,74 +1,37 @@
 <?php
-use DI\Container;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use nrv\api\middlewares\CorsMiddleware;
+use nrv\api\handlers\JsonErrorHandler;
 
-require __DIR__ . '/../vendor/autoload.php';
+$containerBuilder = new ContainerBuilder();
+$containerBuilder->addDefinitions(__DIR__ . '/../config/dependencies.php');
+$containerContainer = $containerBuilder->build();
 
-// 1. Initialisation de Slim avec PHP-DI
-$container = new Container();
-
-// Base de données + repositories (couche infrastructure)
-$container->set(\PDO::class, fn() => \nrv\infrastructure\repositories\PDOFactory::create());
-$container->set(\nrv\core\application\ports\SpectacleRepositoryInterface::class,
-    \DI\autowire(\nrv\infrastructure\repositories\PDOSpectacleRepository::class));
-$container->set(\nrv\core\application\ports\SoireeRepositoryInterface::class,
-    \DI\autowire(\nrv\infrastructure\repositories\PDOSoireeRepository::class));
-$container->set(\nrv\core\application\ports\StyleRepositoryInterface::class,
-    \DI\autowire(\nrv\infrastructure\repositories\PDOStyleRepository::class));
-$container->set(\nrv\core\application\ports\TarifRepositoryInterface::class,
-    \DI\autowire(\nrv\infrastructure\repositories\PDOTarifRepository::class));
-// ServiceCatalogue : ses 4 repositories sont injectés automatiquement
-
-AppFactory::setContainer($container);
+AppFactory::setContainer($containerContainer);
 $app = AppFactory::create();
 
+$settings = $containerContainer->get('settings');
+
+// Middleware CORS
+$app->add(CorsMiddleware::class);
 $app->addBodyParsingMiddleware();
-$app->addRoutingMiddleware();
 
-// 2. Middleware CORS (Autorise le front à faire des fetch)
-$app->add(function (Request $request, $handler) {
-    $response = $handler->handle($request);
-    return $response
-            ->withHeader('Access-Control-Allow-Origin', '*')
-            ->withHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Accept, Origin, Authorization')
-            ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-});
-$app->options('/{routes:.+}', function ($request, $response, $args) {
-    return $response;
-});
+// Routing
+$routes = require __DIR__ . '/../config/routes.php';
+$routes($app);
 
-// 3. Middleware d'Erreurs personnalisé (Format JSON du contrat)
-$errorMiddleware = $app->addErrorMiddleware(true, true, true);
-$errorHandler = $errorMiddleware->getDefaultErrorHandler();
-$errorHandler->forceContentType('application/json');
+// Error Middleware
+$errorMiddleware = $app->addErrorMiddleware(
+    $settings['displayErrorDetails'],
+    true,
+    true
+);
 
-$customErrorHandler = function (Request $request, \Throwable $exception, bool $displayErrorDetails, bool $logErrors, bool $logErrorDetails) use ($app) {
-    $code = $exception->getCode() !== 0 ? $exception->getCode() : 500;
-    if ($exception instanceof \Slim\Exception\HttpNotFoundException) { $code = 404; }
-
-    $payload = [
-        'type' => 'error',
-        'code' => $code,
-        'message' => $exception->getMessage()
-    ];
-    $response = $app->getResponseFactory()->createResponse($code >= 400 ? $code : 500);
-    $response->getBody()->write(json_encode($payload));
-    return $response->withHeader('Content-Type', 'application/json');
-};
-$errorMiddleware->setDefaultErrorHandler($customErrorHandler);
-
-// 4. Test temporaire de l'API
-$app->get('/', function (Request $request, Response $response) {
-    $response->getBody()->write(json_encode(['status' => 'API OK']));
-    return $response->withHeader('Content-Type', 'application/json');
-});
-
-// Les routes de l'API
-$app->get('/spectacles', \nrv\api\actions\GetSpectaclesAction::class);
-$app->get('/spectacles/{id}', \nrv\api\actions\GetSpectacleByIdAction::class);
-$app->get('/soirees/{id}', \nrv\api\actions\GetSoireeByIdAction::class);
-$app->get('/styles', \nrv\api\actions\GetStylesAction::class);
+$errorHandler = new JsonErrorHandler($app, $settings['displayErrorDetails']);
+$errorMiddleware->setDefaultErrorHandler($errorHandler);
 
 $app->run();
