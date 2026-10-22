@@ -1,3 +1,3 @@
-export const USE_MOCKS = true;
+export const USE_MOCKS = false;
 
-export const API_BASE = 'http://localhost:55000';
+export const API_BASE = `http://${window.location.hostname}:55000`;
