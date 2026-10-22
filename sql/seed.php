@@ -137,8 +137,21 @@ foreach ($soirees as $idSoiree => $soiree) {
     }
 }
 
+$utilisateurs = [
+    [1, 'admin@nrv.fr', 'Admin2027!', 'NRV', 'Admin', 'ADMIN'],
+    [2, 'alice@nrv.fr', 'Alice2027!', 'Martin', 'Alice', 'USER'],
+    [3, 'bob@nrv.fr', 'Bob2027!', 'Durand', 'Bob', 'USER'],
+    [4, 'chloe@nrv.fr', 'Chloe2027!', 'Lambert', 'Chloé', 'USER'],
+];
+foreach ($utilisateurs as [$id, $email, $motDePasse, $nom, $prenom, $role]) {
+    $sql[] = sprintf(
+        "INSERT INTO utilisateur (id, email, password_hash, nom, prenom, role) VALUES (%d, %s, %s, %s, %s, %s);",
+        $id, q($email), q(password_hash($motDePasse, PASSWORD_DEFAULT)), q($nom), q($prenom), q($role)
+    );
+}
+
 // Les SERIAL doivent repartir après les id insérés à la main
-foreach (['lieu', 'style', 'soiree', 'spectacle', 'artiste', 'image'] as $table) {
+foreach (['lieu', 'style', 'soiree', 'spectacle', 'artiste', 'image', 'utilisateur'] as $table) {
     $sql[] = "SELECT setval(pg_get_serial_sequence('$table', 'id'), (SELECT MAX(id) FROM $table));";
 }
 
