@@ -7,7 +7,8 @@
         "ext-pdo": "*",
         "slim/slim": "^4.12",
         "slim/psr7": "^1.6",
-        "php-di/php-di": "^7.0"
+        "php-di/php-di": "^7.0",
+        "firebase/php-jwt": "^6.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -26,5 +27,15 @@
     "scripts": {
         "test": "phpunit"
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "policy": {
+            "advisories": {
+                "block": false
+            }
+        }
+    }
 }

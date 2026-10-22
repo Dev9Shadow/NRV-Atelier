@@ -8,10 +8,10 @@ return [
         'jwt_secret' => $_ENV['JWT_SECRET'] ?? 'secret_par_defaut',
         'jwt_lifetime' => 10800, // 3 heures
         'db' => [
-            'host' => $_ENV['DB_HOST'] ?? 'mysql',
-            'dbname' => $_ENV['DB_NAME'] ?? 'nrv',
-            'user' => $_ENV['DB_USER'] ?? 'nrv',
-            'pass' => $_ENV['DB_PASS'] ?? 'nrv',
+            'host' => $_ENV['DB_HOST'] ?? 'db',
+            'dbname' => $_ENV['DB_NAME'] ?? 'nrv_db',
+            'user' => $_ENV['DB_USER'] ?? 'nrv_user',
+            'pass' => $_ENV['DB_PASSWORD'] ?? 'nrv_password',
         ]
     ]
 ];
