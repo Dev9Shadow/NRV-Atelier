@@ -7,6 +7,8 @@ use nrv\core\application\ports\SoireeRepositoryInterface;
 use nrv\core\application\ports\StyleRepositoryInterface;
 use nrv\core\application\ports\TarifRepositoryInterface;
 use nrv\core\application\ports\JaugeRepositoryInterface;
+use nrv\core\application\ports\AuthTokenProviderInterface;
+use nrv\infrastructure\auth\JwtTokenProvider;
 
 use nrv\infrastructure\repositories\PDOSpectacleRepository;
 use nrv\infrastructure\repositories\PDOSoireeRepository;
@@ -54,6 +56,11 @@ return [
     },
     \nrv\core\application\ports\CommandeRepositoryInterface::class => \DI\autowire(\nrv\infrastructure\repositories\PDOCommandeRepository::class),
     \nrv\core\application\ports\BilletRepositoryInterface::class => \DI\autowire(\nrv\infrastructure\repositories\PDOBilletRepository::class),
-    \nrv\core\application\ports\AuthTokenProviderInterface::class => \DI\autowire(\nrv\infrastructure\auth\JWTTokenProvider::class),
+    
+    AuthTokenProviderInterface::class => function (ContainerInterface $c) {
+        $settings = $c->get('settings');
+        return new JwtTokenProvider($settings['jwt_secret'], $settings['jwt_lifetime']);
+    },
+
     \nrv\core\application\ports\UtilisateurRepositoryInterface::class => \DI\autowire(\nrv\infrastructure\repositories\PDOUtilisateurRepository::class),
 ];

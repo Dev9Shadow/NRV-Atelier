@@ -25,7 +25,7 @@ class PDOUtilisateurRepository implements UtilisateurRepositoryInterface
 
         return new Utilisateur(
             $data['email'],
-            $data['password'],
+            $data['password_hash'],
             $data['nom'],
             $data['prenom'],
             $data['role'] ?? 'USER',
@@ -35,7 +35,7 @@ class PDOUtilisateurRepository implements UtilisateurRepositoryInterface
 
     public function save(Utilisateur $utilisateur): int
     {
-        $stmt = $this->pdo->prepare("INSERT INTO utilisateur (email, password, nom, prenom, role) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $this->pdo->prepare("INSERT INTO utilisateur (email, password_hash, nom, prenom, role) VALUES (?, ?, ?, ?, ?)");
         $stmt->execute([
             $utilisateur->email,
             $utilisateur->password,
