@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion / Inscription - NRV</title>
+    <link rel="stylesheet" href="./scss/main.css">
+</head>
+<body>
+    <main class="container">
+        <!-- Formulaire de Connexion -->
+        <div class="form-container">
+            <h2>Connexion</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" autocomplete="email" required>
+                    <div id="login-error" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Mot de passe</label>
+                    <input type="password" id="login-password" autocomplete="current-password" required>
+                </div>
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
+
+        <!-- Formulaire d'Inscription -->
+        <div class="form-container">
+            <h2>Inscription</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-nom">Nom</label>
+                    <input type="text" id="register-nom" autocomplete="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" autocomplete="email" required>
+                    <div id="register-error" class="error-message"></div>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Mot de passe</label>
+                    <input type="password" id="register-password" autocomplete="new-password" required>
+                </div>
+                <button type="submit">S'inscrire</button>
+            </form>
+        </div>
+    </main>
+
+    <script type="module" src="./js/connexion.js"></script>
+</body>
+</html>
