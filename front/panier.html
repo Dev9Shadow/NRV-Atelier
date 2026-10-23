@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Panier — NRV.net</title>
+    <meta name="description" content="Votre panier de billets pour le festival Nancy Rock Vibration.">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="site-header__logo" href="index.html">NRV.net</a>
+        <nav class="site-header__nav" aria-label="Navigation principale">
+            <ul>
+                <li><a href="index.html">Programme</a></li>
+                <li><a href="panier.html" aria-current="page">Panier</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="panier">
+        <h1 class="titre-page">Mon panier</h1>
+        <p class="panier__erreur" id="erreur" role="alert"></p>
+        <div id="contenu" aria-live="polite"></div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Nancy Rock Vibration</p>
+    </footer>
+
+    <script id="tpl-panier" type="text/x-handlebars-template">
+        {{#if lignes.length}}
+        <div class="panier__grille">
+            <ul class="panier__lignes">
+                {{#each lignes}}
+                <li class="ligne-panier">
+                    <div class="ligne-panier__infos">
+                        <h2 class="ligne-panier__titre">{{libelle}} <span class="badge">Tarif {{tarif}}</span></h2>
+                        <ul class="ligne-panier__soirees">
+                            {{#each soirees}}
+                            <li><a href="soiree.html?id={{id}}">{{dateLongue date}} · {{nom}}</a></li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <div class="ligne-panier__quantite">
+                        <label for="quantite-{{id}}">Quantité</label>
+                        <input type="number" id="quantite-{{id}}" min="1" max="10" value="{{quantite}}" data-ligne="{{id}}">
+                    </div>
+                    <p class="ligne-panier__prix">
+                        <span>{{prix prixUnitaire}} × {{quantite}}</span>
+                        <strong>{{prix sousTotal}}</strong>
+                    </p>
+                    <button class="bouton bouton--secondaire ligne-panier__supprimer" type="button" data-supprimer="{{id}}">Supprimer</button>
+                </li>
+                {{/each}}
+            </ul>
+            <div class="panier__recap">
+                <p class="panier__total">Total <strong>{{prix montantTotal}}</strong></p>
+                <button class="bouton" type="button" id="valider">Valider la commande</button>
+            </div>
+        </div>
+        {{else}}
+        <p class="message">Votre panier est vide. <a href="index.html">Voir le programme</a></p>
+        {{/if}}
+    </script>
+    <script src="js/lib/handlebars.min.js"></script>
+    <script type="module" src="js/panier.js"></script>
+</body>
+</html>
