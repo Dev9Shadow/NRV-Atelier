@@ -4,7 +4,6 @@ import { getJSON } from './api.js';
 document.addEventListener('DOMContentLoaded', async () => {
     const mainContent = document.getElementById('admin-content');
 
-    // Vérification du rôle admin
     if (!estAdmin()) {
         mainContent.innerHTML = `
             <div class="access-denied">
@@ -17,9 +16,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        // Appel de l'API /admin/soirees
-        const data = await getJSON('/admin/soirees');
-        renderJauges(data);
+        const response = await getJSON('/admin/soirees');
+        
+        const jauges = Array.isArray(response) ? response : (response.soirees || response.data || []);
+        
+        renderJauges(jauges);
     } catch (error) {
         console.error('Erreur lors du chargement des jauges:', error);
         mainContent.innerHTML = `<p style="color: red; text-align: center;">Erreur lors du chargement des données d'administration.</p>`;
@@ -36,7 +37,7 @@ function renderJauges(jauges) {
     jauges.forEach(j => {
         totalPlacesVendues += j.places_vendues || 0;
         totalCapacite += j.capacite || 0;
-        totalRecette += j.recette || 0;
+        totalRecette += Number(j.recette) || 0;
     });
 
     let html = `
@@ -60,7 +61,7 @@ function renderJauges(jauges) {
         const vendues = j.places_vendues || 0;
         const capacite = j.capacite || 1;
         const pourcentage = Math.min(Math.round((vendues / capacite) * 100), 100);
-        const recette = (j.recette || 0).toFixed(2);
+        const recette = (Number(j.recette) || 0).toFixed(2);
 
         html += `
             <tr>

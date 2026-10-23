@@ -4,10 +4,7 @@ export async function connecter(email, password) {
     try {
         const data = await envoyerJSON('POST', '/auth/signin', { email, password });
         if (data && data.token) {
-            ecrireSession(data.token, {
-                nom: data.nom || email,
-                role: data.role || 'USER'
-            });
+            ecrireSession(data.token, data.utilisateur);
             return true;
         }
         return false;
@@ -19,7 +16,7 @@ export async function connecter(email, password) {
 
 export async function inscrire(nom, prenom, email, password) {
     try {
-        const data = await envoyerJSON('POST', '/auth/signup', { nom, prenom, email, password });
+        const data = await envoyerJSON('POST', '/auth/register', { nom, prenom, email, password });
         return data;
     } catch (error) {
         console.error('Erreur d\'inscription:', error);
@@ -34,7 +31,9 @@ export function deconnecter() {
 
 export function estAdmin() {
     const session = lireSession();
-    return session && session.utilisateur && session.utilisateur.role === 'ADMIN';
+    if (!session || !session.utilisateur || !session.utilisateur.role) return false;
+    const role = String(session.utilisateur.role).toUpperCase();
+    return role === 'ADMIN' || role === 'ADMINISTRATEUR';
 }
 
 export function utilisateurConnecte() {
