@@ -718,3 +718,220 @@ a:focus-visible {
     border-left: 2px dashed #000;
   }
 }
+.form-container {
+  max-width: 450px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.form-container h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+.form-container .form-group {
+  margin-bottom: 1.2rem;
+}
+.form-container .form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+.form-container .form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.form-container .form-group input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+.form-container .form-group .error-message {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+.form-container .form-group .error-message.visible {
+  display: block;
+}
+.form-container button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.form-container button:hover {
+  background-color: #0056b3;
+}
+
+.paiement {
+  width: 100%;
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+@media (min-width: 48rem) {
+  .paiement {
+    padding-inline: 1.5rem;
+  }
+}
+.paiement {
+  padding-block: 1.5rem 3rem;
+}
+@media (min-width: 48rem) {
+  .paiement {
+    padding-block: 3rem;
+  }
+}
+.paiement__grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+}
+@media (min-width: 64rem) {
+  .paiement__grille {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.paiement__grille {
+  align-items: start;
+}
+.paiement__grille .form-container {
+  width: 100%;
+  margin: 0;
+}
+.paiement__note {
+  margin-bottom: 1rem;
+  font-size: 0.8125rem;
+  color: #6b6b6b;
+}
+.paiement__ligne {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+}
+.paiement__ligne > .form-group {
+  flex: 1 1 8rem;
+  min-width: 0;
+}
+.paiement__erreur {
+  display: none;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid #1a1a1a;
+  background: #f2f2f2;
+  font-weight: 700;
+}
+.paiement__erreur.visible {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.paiement input[aria-invalid=true] {
+  border-style: dashed;
+  border-color: #1a1a1a;
+}
+.paiement button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.recap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: #f2f2f2;
+  border-radius: 0.5rem;
+}
+.recap__titre {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+.recap__lignes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.recap__ligne {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  padding-block: 1rem;
+  border-bottom: 1px solid #c9c9c9;
+}
+.recap__libelle {
+  font-weight: 700;
+}
+.recap__soirees {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.875rem;
+  color: #6b6b6b;
+}
+.recap__montant {
+  font-family: Impact, "Arial Narrow Bold", sans-serif;
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+.recap__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.recap__total strong {
+  font-family: Impact, "Arial Narrow Bold", sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  max-width: 40rem;
+}
+.confirmation__titre {
+  text-transform: uppercase;
+}
+.confirmation__billets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+.confirmation__billets li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.5rem 1rem;
+  background: #f2f2f2;
+  border-radius: 0.25rem;
+}
+.confirmation__billets a {
+  font-weight: 700;
+}
+.confirmation__billets span {
+  color: #6b6b6b;
+}
+.confirmation .bouton {
+  text-decoration: none;
+}
