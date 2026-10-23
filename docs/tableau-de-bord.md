@@ -10,7 +10,7 @@ Groupe : Romain Santilli, Cinar Erdal, Eliot Schmitt
 |---|---|
 | Dépôt Git | https://github.com/Dev9Shadow/NRV-Atelier |
 | Installation | `README.md` |
-| Application (docketu) | ROMAIN FAUT METTRE LE LIEN DOCKETU ICI |
+| Application (docketu) | `http://docketu.iutnc.univ-lorraine.fr:55001/` |
 | Données et comptes de test | `docs/donnees-test.md` |
 | Modèle du domaine | `docs/modele-domaine.png` |
 
