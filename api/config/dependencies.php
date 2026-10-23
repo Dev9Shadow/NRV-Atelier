@@ -15,4 +15,6 @@ return [
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $pdo;
     },
+    \nrv\core\application\ports\CommandeRepositoryInterface::class => \DI\autowire(\nrv\infrastructure\repositories\PDOCommandeRepository::class),
+    \nrv\core\application\ports\BilletRepositoryInterface::class => \DI\autowire(\nrv\infrastructure\repositories\PDOBilletRepository::class),
 ];
