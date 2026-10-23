@@ -1,5 +1,6 @@
 import { getJSON } from './api.js';
 import { rendu } from './templates.js';
+import { initialiserReservation } from './reservation.js';
 
 const fiche = document.querySelector('#fiche');
 const id = new URLSearchParams(window.location.search).get('id') ?? '';
@@ -30,6 +31,7 @@ async function afficherSoiree() {
         fiche.innerHTML = rendu('tpl-soiree', soiree);
         document.title = `${soiree.nom} — NRV.net`;
         allerAuSpectacle();
+        await initialiserReservation(soiree);
     } catch (erreur) {
         afficherMessage(erreur.message);
     }

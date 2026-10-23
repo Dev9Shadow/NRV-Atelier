@@ -50,6 +50,34 @@
                 </dl>
                 <p class="billets__note">Réduit : étudiants, demandeurs d'emploi, personnes en situation de handicap. Pass 3 jours : −3 %.</p>
                 <p class="billets__places">{{placesRestantes}} places restantes</p>
+                {{#if placesRestantes}}
+                <form class="reservation" id="reservation">
+                    <fieldset class="reservation__choix">
+                        <legend>Billet</legend>
+                        <label><input type="radio" name="typeBillet" value="SIMPLE" checked> Cette soirée</label>
+                        <label><input type="radio" name="typeBillet" value="PASS_3J" id="choix-pass"> Pass 3 jours</label>
+                    </fieldset>
+                    <fieldset class="reservation__pass" id="reservation-pass" hidden disabled>
+                        <legend>Les 2 autres soirées du pass</legend>
+                        <select name="soiree2" aria-label="Deuxième soirée du pass"></select>
+                        <select name="soiree3" aria-label="Troisième soirée du pass"></select>
+                    </fieldset>
+                    <fieldset class="reservation__choix">
+                        <legend>Tarif</legend>
+                        <label><input type="radio" name="categorie" value="NORMAL" checked> Normal</label>
+                        <label><input type="radio" name="categorie" value="REDUIT"> Réduit</label>
+                    </fieldset>
+                    <div class="reservation__quantite">
+                        <label for="quantite">Quantité</label>
+                        <input type="number" id="quantite" name="quantite" min="1" max="10" value="1" required>
+                    </div>
+                    <p class="reservation__total">Total <output id="reservation-total" for="quantite"></output></p>
+                    <button class="bouton" type="submit">Ajouter au panier</button>
+                    <p class="reservation__message" id="reservation-message" role="status"></p>
+                </form>
+                {{else}}
+                <p class="billets__places">Soirée complète</p>
+                {{/if}}
             </aside>
 
             <section class="fiche-soiree__programme" aria-labelledby="titre-programme">
@@ -77,6 +105,11 @@
                 {{/each}}
             </section>
         </article>
+    </script>
+    <script id="tpl-options-soirees" type="text/x-handlebars-template">
+        {{#each soirees}}
+        <option value="{{id}}">{{dateLongue date}} · {{nom}}</option>
+        {{/each}}
     </script>
     <script src="js/lib/handlebars.min.js"></script>
     <script type="module" src="js/soiree.js"></script>

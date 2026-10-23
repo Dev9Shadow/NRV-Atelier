@@ -442,6 +442,106 @@ a:focus-visible {
   border-radius: 0.25rem;
 }
 
+.reservation {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #c9c9c9;
+}
+.reservation fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.reservation legend {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+.reservation select,
+.reservation input[type=number] {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0 0.5rem;
+  border: 1.5px solid #c9c9c9;
+  border-radius: 0.25rem;
+  background: #ffffff;
+  font: inherit;
+}
+.reservation select:focus-visible,
+.reservation input[type=number]:focus-visible {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 2px;
+}
+.reservation__choix {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.reservation__choix label {
+  display: flex;
+  flex: 1 1 8rem;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border: 1.5px solid #c9c9c9;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.reservation__choix label:has(:checked) {
+  border-color: #1a1a1a;
+  font-weight: 700;
+}
+.reservation__choix label:has(:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.reservation__choix input {
+  accent-color: #1a1a1a;
+}
+.reservation__pass {
+  display: grid;
+  gap: 0.5rem;
+}
+.reservation__pass[hidden] {
+  display: none;
+}
+.reservation__quantite {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.reservation__quantite input[type=number] {
+  width: 6rem;
+}
+.reservation__total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-weight: 700;
+}
+.reservation__total output {
+  font-family: Impact, "Arial Narrow Bold", sans-serif;
+  font-size: 1.375rem;
+}
+.reservation .bouton {
+  width: 100%;
+}
+.reservation__message {
+  font-size: 0.875rem;
+}
+.reservation__message:empty {
+  display: none;
+}
+.reservation__message a {
+  font-weight: 700;
+}
+
 .bloc-spectacle {
   display: grid;
   grid-template-columns: minmax(0, 1fr);

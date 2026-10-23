@@ -1,0 +1,116 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.reservation {
+    display: flex;
+    flex-direction: column;
+    gap: espace(m);
+    padding-top: espace(m);
+    border-top: 1px solid $couleur-trait;
+
+    fieldset {
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    legend {
+        margin-bottom: espace(s);
+        font-size: 0.875rem;
+        font-weight: 700;
+    }
+
+    select,
+    input[type="number"] {
+        width: 100%;
+        min-height: 2.75rem;
+        padding: 0 espace(s);
+        border: 1.5px solid $couleur-trait;
+        border-radius: $rayon-petit;
+        background: $couleur-fond;
+        font: inherit;
+        @include focus-visible;
+    }
+
+    &__choix {
+        display: flex;
+        flex-wrap: wrap;
+        gap: espace(s);
+
+        label {
+            display: flex;
+            flex: 1 1 8rem;
+            align-items: center;
+            gap: espace(s);
+            min-height: 2.75rem;
+            padding: 0 espace(m);
+            border: 1.5px solid $couleur-trait;
+            border-radius: $rayon-petit;
+            cursor: pointer;
+            transition: border-color $transition;
+
+            &:has(:checked) {
+                border-color: $couleur-texte;
+                font-weight: 700;
+            }
+
+            &:has(:disabled) {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+        }
+
+        input {
+            accent-color: $couleur-texte;
+        }
+    }
+
+    &__pass {
+        display: grid;
+        gap: espace(s);
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    &__quantite {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: espace(m);
+
+        input[type="number"] {
+            width: 6rem;
+        }
+    }
+
+    &__total {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        font-weight: 700;
+
+        output {
+            font-family: $police-titre;
+            font-size: 1.375rem;
+        }
+    }
+
+    .bouton {
+        width: 100%;
+    }
+
+    &__message {
+        font-size: 0.875rem;
+
+        &:empty {
+            display: none;
+        }
+
+        a {
+            font-weight: 700;
+        }
+    }
+}
