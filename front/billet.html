@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mon billet — NRV.net</title>
+    <meta name="description" content="Billet d'entrée imprimable pour le festival Nancy Rock Vibration.">
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="site-header__logo" href="index.html">NRV.net</a>
+        <nav class="site-header__nav" aria-label="Navigation principale">
+            <ul>
+                <li><a href="index.html">Programme</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="page-billets">
+        <div class="page-billets__actions">
+            <h1 class="titre-page">Mes billets</h1>
+            <button class="bouton" type="button" id="imprimer" hidden>Imprimer</button>
+        </div>
+        <div class="page-billets__liste" id="billets" aria-live="polite"></div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Nancy Rock Vibration</p>
+    </footer>
+
+    <script id="tpl-billet" type="text/x-handlebars-template">
+        <article class="billet">
+            <div class="billet__corps">
+                <header class="billet__entete">
+                    <p class="billet__festival">Nancy Rock Vibration 2027</p>
+                    <p class="billet__type">{{typeLibelle typeBillet}}</p>
+                </header>
+
+                <ul class="billet__soirees">
+                    {{#each soirees}}
+                    <li class="billet__soiree">
+                        <h2 class="billet__nom-soiree">{{nom}}</h2>
+                        <p class="billet__date">
+                            <time datetime="{{date}}T{{horaire}}">{{dateLongue date}} · {{horaire}}</time>
+                        </p>
+                        <p class="billet__lieu">{{lieu}}</p>
+                    </li>
+                    {{/each}}
+                </ul>
+
+                <dl class="billet__infos">
+                    <div>
+                        <dt>Acheteur</dt>
+                        <dd>{{acheteur}}</dd>
+                    </div>
+                    <div>
+                        <dt>Tarif</dt>
+                        <dd>{{categorieLibelle categorie}} · {{prix prix}}</dd>
+                    </div>
+                </dl>
+            </div>
+
+            <div class="billet__talon">
+                <p class="billet__libelle-ref">Référence</p>
+                <p class="billet__reference">{{reference}}</p>
+                <p class="billet__mention">Billet non nominatif. Présentez-le à l'entrée, imprimé ou sur votre téléphone.</p>
+            </div>
+        </article>
+    </script>
+
+    <script id="tpl-message" type="text/x-handlebars-template">
+        <p class="message">{{texte}}</p>
+    </script>
+
+    <script src="js/lib/handlebars.min.js"></script>
+    <script type="module" src="js/billet.js"></script>
+</body>
+</html>

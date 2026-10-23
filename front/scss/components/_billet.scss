@@ -1,0 +1,220 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+$perforation: 2px dashed $couleur-texte;
+
+.page-billets {
+    @include conteneur;
+    padding-block: espace(l) espace(xxl);
+
+    @include bp(md) {
+        padding-block: espace(xxl);
+    }
+
+    &__actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: espace(m);
+        margin-bottom: espace(l);
+
+        .titre-page {
+            margin-bottom: 0;
+        }
+    }
+
+    &__liste {
+        display: flex;
+        flex-direction: column;
+        gap: espace(xl);
+    }
+}
+
+.billet {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 50rem;
+    border: 2px solid $couleur-texte;
+    border-radius: $rayon;
+    overflow: hidden;
+    background: $couleur-fond;
+
+    @include bp(md) {
+        grid-template-columns: minmax(0, 1fr) 14rem;
+    }
+
+    &__corps {
+        display: flex;
+        flex-direction: column;
+        gap: espace(l);
+        padding: espace(l);
+    }
+
+    &__entete {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: espace(s);
+        padding-bottom: espace(m);
+        border-bottom: 1px solid $couleur-trait;
+    }
+
+    &__festival {
+        font-family: $police-titre;
+        font-size: 1.5rem;
+        text-transform: uppercase;
+    }
+
+    &__type {
+        padding: espace(xs) espace(s);
+        background: $couleur-texte;
+        color: $couleur-fond;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+
+    &__soirees {
+        @include liste-nue;
+        display: flex;
+        flex-direction: column;
+        gap: espace(m);
+    }
+
+    &__soiree + &__soiree {
+        padding-top: espace(m);
+        border-top: 1px dotted $couleur-trait;
+    }
+
+    &__nom-soiree {
+        font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+        text-transform: uppercase;
+    }
+
+    &__date {
+        font-size: 1.125rem;
+        font-weight: 700;
+    }
+
+    &__lieu {
+        color: $couleur-texte-doux;
+        font-size: 0.9375rem;
+    }
+
+    &__infos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: espace(m) espace(xl);
+
+        dt {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: $couleur-texte-doux;
+        }
+
+        dd {
+            font-weight: 700;
+        }
+    }
+
+    &__talon {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: espace(s);
+        padding: espace(l);
+        border-top: $perforation;
+        background: $couleur-surface;
+
+        @include bp(md) {
+            border-top: 0;
+            border-left: $perforation;
+        }
+    }
+
+    &__libelle-ref {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: $couleur-texte-doux;
+    }
+
+    &__reference {
+        font-family: ui-monospace, "Courier New", monospace;
+        font-size: 1.0625rem;
+        font-weight: 700;
+        white-space: nowrap;
+    }
+
+    &__mention {
+        font-size: 0.75rem;
+        line-height: 1.4;
+        color: $couleur-texte-doux;
+    }
+}
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 15mm;
+    }
+
+    .site-header,
+    .site-footer,
+    .page-billets__actions,
+    nav,
+    button,
+    .bouton {
+        display: none !important;
+    }
+
+    body {
+        display: block;
+        min-height: 0;
+        background: #fff;
+        color: #000;
+    }
+
+    .page-billets {
+        max-width: none;
+        padding: 0;
+    }
+
+    .page-billets__liste {
+        display: block;
+    }
+
+    .billet {
+        grid-template-columns: minmax(0, 1fr) 14rem;
+        max-width: none;
+        border-color: #000;
+        break-inside: avoid;
+        page-break-inside: avoid;
+        break-after: page;
+        page-break-after: always;
+
+        &:last-child {
+            break-after: auto;
+            page-break-after: auto;
+        }
+
+        * {
+            color: #000 !important;
+        }
+
+        &__type {
+            background: none;
+            border: 1.5px solid #000;
+        }
+
+        &__talon {
+            background: none;
+            border-top: 0;
+            border-left: 2px dashed #000;
+        }
+    }
+}

@@ -515,3 +515,206 @@ a:focus-visible {
     grid-column: 1/-1;
   }
 }
+
+.page-billets {
+  width: 100%;
+  max-width: 75rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+@media (min-width: 48rem) {
+  .page-billets {
+    padding-inline: 1.5rem;
+  }
+}
+.page-billets {
+  padding-block: 1.5rem 3rem;
+}
+@media (min-width: 48rem) {
+  .page-billets {
+    padding-block: 3rem;
+  }
+}
+.page-billets__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.page-billets__actions .titre-page {
+  margin-bottom: 0;
+}
+.page-billets__liste {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.billet {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 50rem;
+  border: 2px solid #1a1a1a;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: #ffffff;
+}
+@media (min-width: 48rem) {
+  .billet {
+    grid-template-columns: minmax(0, 1fr) 14rem;
+  }
+}
+.billet__corps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+}
+.billet__entete {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #c9c9c9;
+}
+.billet__festival {
+  font-family: Impact, "Arial Narrow Bold", sans-serif;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+.billet__type {
+  padding: 0.25rem 0.5rem;
+  background: #1a1a1a;
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.billet__soirees {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.billet__soiree + .billet__soiree {
+  padding-top: 1rem;
+  border-top: 1px dotted #c9c9c9;
+}
+.billet__nom-soiree {
+  font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
+  text-transform: uppercase;
+}
+.billet__date {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.billet__lieu {
+  color: #6b6b6b;
+  font-size: 0.9375rem;
+}
+.billet__infos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+}
+.billet__infos dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b6b6b;
+}
+.billet__infos dd {
+  font-weight: 700;
+}
+.billet__talon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  border-top: 2px dashed #1a1a1a;
+  background: #f2f2f2;
+}
+@media (min-width: 48rem) {
+  .billet__talon {
+    border-top: 0;
+    border-left: 2px dashed #1a1a1a;
+  }
+}
+.billet__libelle-ref {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6b6b6b;
+}
+.billet__reference {
+  font-family: ui-monospace, "Courier New", monospace;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.billet__mention {
+  font-size: 0.75rem;
+  line-height: 1.4;
+  color: #6b6b6b;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 15mm;
+  }
+  .site-header,
+  .site-footer,
+  .page-billets__actions,
+  nav,
+  button,
+  .bouton {
+    display: none !important;
+  }
+  body {
+    display: block;
+    min-height: 0;
+    background: #fff;
+    color: #000;
+  }
+  .page-billets {
+    max-width: none;
+    padding: 0;
+  }
+  .page-billets__liste {
+    display: block;
+  }
+  .billet {
+    grid-template-columns: minmax(0, 1fr) 14rem;
+    max-width: none;
+    border-color: #000;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    break-after: page;
+    page-break-after: always;
+  }
+  .billet:last-child {
+    break-after: auto;
+    page-break-after: auto;
+  }
+  .billet * {
+    color: #000 !important;
+  }
+  .billet__type {
+    background: none;
+    border: 1.5px solid #000;
+  }
+  .billet__talon {
+    background: none;
+    border-top: 0;
+    border-left: 2px dashed #000;
+  }
+}
