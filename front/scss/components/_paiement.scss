@@ -1,0 +1,160 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
+.paiement {
+    @include conteneur;
+    padding-block: espace(l) espace(xxl);
+
+    @include bp(md) {
+        padding-block: espace(xxl);
+    }
+
+    &__grille {
+        @include grille-adaptative((lg: 2), espace(xl));
+        align-items: start;
+
+        .form-container {
+            width: 100%;
+            margin: 0;
+        }
+    }
+
+    &__note {
+        margin-bottom: espace(m);
+        font-size: 0.8125rem;
+        color: $couleur-texte-doux;
+    }
+
+    &__ligne {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 espace(m);
+
+        > .form-group {
+            flex: 1 1 8rem;
+            min-width: 0;
+        }
+    }
+
+    &__erreur {
+        display: none;
+        margin-bottom: espace(m);
+        padding: espace(s) espace(m);
+        border-left: 4px solid $couleur-texte;
+        background: $couleur-surface;
+        font-weight: 700;
+
+        &.visible {
+            display: flex;
+            flex-direction: column;
+            gap: espace(xs);
+        }
+    }
+
+    input[aria-invalid="true"] {
+        border-style: dashed;
+        border-color: $couleur-texte;
+    }
+
+    button:disabled {
+        opacity: 0.6;
+        cursor: wait;
+    }
+}
+
+.recap {
+    display: flex;
+    flex-direction: column;
+    gap: espace(m);
+    padding: 1.25rem;
+    background: $couleur-surface;
+    border-radius: $rayon;
+
+    &__titre {
+        font-size: 1.5rem;
+        text-transform: uppercase;
+    }
+
+    &__lignes {
+        @include liste-nue;
+    }
+
+    &__ligne {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: espace(m);
+        padding-block: espace(m);
+        border-bottom: 1px solid $couleur-trait;
+    }
+
+    &__libelle {
+        font-weight: 700;
+    }
+
+    &__soirees {
+        @include liste-nue;
+        font-size: 0.875rem;
+        color: $couleur-texte-doux;
+    }
+
+    &__montant {
+        font-family: $police-titre;
+        font-size: 1.25rem;
+        white-space: nowrap;
+    }
+
+    &__total {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+
+        strong {
+            font-family: $police-titre;
+            font-size: 2rem;
+            font-weight: 400;
+        }
+    }
+}
+
+.confirmation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: espace(m);
+    max-width: 40rem;
+
+    &__titre {
+        text-transform: uppercase;
+    }
+
+    &__billets {
+        @include liste-nue;
+        display: flex;
+        flex-direction: column;
+        gap: espace(s);
+        width: 100%;
+
+        li {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: espace(xs) espace(m);
+            padding: espace(s) espace(m);
+            background: $couleur-surface;
+            border-radius: $rayon-petit;
+        }
+
+        a {
+            font-weight: 700;
+        }
+
+        span {
+            color: $couleur-texte-doux;
+        }
+    }
+
+    .bouton {
+        text-decoration: none;
+    }
+}

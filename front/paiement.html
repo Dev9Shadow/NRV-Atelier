@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paiement — NRV.net</title>
+    <meta name="description" content="Paiement de votre commande de billets pour le festival Nancy Rock Vibration.">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <header class="site-header">
+        <a class="site-header__logo" href="index.html">NRV.net</a>
+        <nav class="site-header__nav" aria-label="Navigation principale">
+            <ul>
+                <li><a href="index.html">Programme</a></li>
+                <li><a href="panier.html">Panier</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="paiement">
+        <h1 class="titre-page">Paiement</h1>
+        <div id="contenu" aria-live="polite"></div>
+    </main>
+
+    <footer class="site-footer">
+        <p>Nancy Rock Vibration</p>
+    </footer>
+
+    <script id="tpl-paiement" type="text/x-handlebars-template">
+        <div class="paiement__grille">
+            <section class="recap" aria-labelledby="titre-recap">
+                <h2 class="recap__titre" id="titre-recap">Commande n°{{id}}</h2>
+                <ul class="recap__lignes">
+                    {{#each lignes}}
+                    <li class="recap__ligne">
+                        <div>
+                            <p class="recap__libelle">{{quantite}} × {{typeLibelle typeBillet}} · {{categorieLibelle categorie}}</p>
+                            <ul class="recap__soirees">
+                                {{#each soirees}}
+                                <li>{{nom}} — <time datetime="{{date}}">{{dateLongue date}}</time></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        <p class="recap__montant">{{prix sousTotal}}</p>
+                    </li>
+                    {{/each}}
+                </ul>
+                <p class="recap__total">Total <strong>{{prix montantTotal}}</strong></p>
+            </section>
+
+            <div class="form-container">
+                <h2>Carte bancaire</h2>
+                <form id="form-paiement" novalidate>
+                    <p class="paiement__note">Paiement simulé : aucune somme n'est débitée et la carte n'est pas enregistrée.</p>
+                    <div class="form-group">
+                        <label for="numero">Numéro de carte</label>
+                        <input id="numero" name="numero" type="text" inputmode="numeric" autocomplete="cc-number"
+                               placeholder="1234 5678 9012 3456" maxlength="19" required pattern="[0-9 ]{16,19}"
+                               aria-describedby="erreur-numero">
+                        <p class="error-message" id="erreur-numero">Saisissez les 16 chiffres de la carte.</p>
+                    </div>
+                    <div class="paiement__ligne">
+                        <div class="form-group">
+                            <label for="expiration">Expiration</label>
+                            <input id="expiration" name="expiration" type="text" inputmode="numeric" autocomplete="cc-exp"
+                                   placeholder="MM/AA" maxlength="5" required pattern="(0[1-9]|1[0-2])/[0-9]{2}"
+                                   aria-describedby="erreur-expiration">
+                            <p class="error-message" id="erreur-expiration">Format MM/AA.</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="cvc">Code de sécurité</label>
+                            <input id="cvc" name="cvc" type="text" inputmode="numeric" autocomplete="cc-csc"
+                                   placeholder="123" maxlength="3" required pattern="[0-9]{3}"
+                                   aria-describedby="erreur-cvc">
+                            <p class="error-message" id="erreur-cvc">3 chiffres au dos de la carte.</p>
+                        </div>
+                    </div>
+                    <div class="paiement__erreur" id="erreur-paiement" role="alert"></div>
+                    <button type="submit">Payer {{prix montantTotal}}</button>
+                </form>
+            </div>
+        </div>
+    </script>
+
+    <script id="tpl-confirmation" type="text/x-handlebars-template">
+        <section class="confirmation" aria-labelledby="titre-confirmation">
+            <h2 class="confirmation__titre" id="titre-confirmation">Paiement accepté</h2>
+            <p>Commande n°{{id}} réglée : {{prix montantTotal}}. Vos billets sont prêts.</p>
+            <ul class="confirmation__billets">
+                {{#each billets}}
+                <li>
+                    <a href="billet.html?token={{token}}">{{billet.reference}}</a>
+                    <span>{{typeLibelle billet.typeBillet}} · {{categorieLibelle billet.categorie}}</span>
+                </li>
+                {{/each}}
+            </ul>
+            <a class="bouton" href="{{lienTous}}">Afficher et imprimer tous mes billets</a>
+        </section>
+    </script>
+
+    <script id="tpl-message" type="text/x-handlebars-template">
+        <div class="message">
+            <p>{{texte}}</p>
+            {{#if lien}}<p><a href="{{lien.href}}">{{lien.texte}}</a></p>{{/if}}
+        </div>
+    </script>
+
+    <script src="js/lib/handlebars.min.js"></script>
+    <script type="module" src="js/paiement.js"></script>
+</body>
+</html>
