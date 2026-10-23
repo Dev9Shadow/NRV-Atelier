@@ -1,0 +1,123 @@
+.admin-jauge-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 1rem;
+
+    h1, h2 {
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .total-card {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
+
+    .access-denied {
+        text-align: center;
+        padding: 3rem;
+        background: #fff3f3;
+        border: 1px solid #f5c6cb;
+        border-radius: 8px;
+        color: #721c24;
+
+        a {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #007bff;
+            text-decoration: underline;
+        }
+    }
+
+    /* Tableau Desktop par défaut */
+    .jauge-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        th {
+            background-color: #343a40;
+            color: white;
+        }
+    }
+
+    /* Barre de progression de remplissage */
+    .progress-bar-container {
+        background: #e9ecef;
+        border-radius: 4px;
+        overflow: hidden;
+        height: 20px;
+        width: 100%;
+        position: relative;
+
+        .progress-fill {
+            background-color: #28a745;
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            top: 0;
+            left: 0;
+            font-size: 0.85rem;
+            color: #333;
+            font-weight: bold;
+        }
+    }
+}
+
+/* Version Mobile : Transformation en cartes (grid) */
+@media (max-width: 768px) {
+    .admin-jauge-container {
+        .jauge-table, 
+        .jauge-table tbody, 
+        .jauge-table tr, 
+        .jauge-table td {
+            display: block;
+            width: 100%;
+        }
+
+        .jauge-table thead {
+            display: none; /* Cache l'en-tête du tableau sur mobile */
+        }
+
+        .jauge-table tr {
+            background: #fff;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .jauge-table td {
+            padding: 0.5rem 0;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #555;
+            }
+        }
+    }
+}
