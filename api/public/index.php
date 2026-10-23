@@ -16,10 +16,6 @@ $app = AppFactory::create();
 
 $settings = $containerContainer->get('settings');
 
-// Middleware CORS
-$app->add(CorsMiddleware::class);
-$app->addBodyParsingMiddleware();
-
 // Routing
 $routes = require __DIR__ . '/../config/routes.php';
 $routes($app);
@@ -30,6 +26,10 @@ $errorMiddleware = $app->addErrorMiddleware(
     true,
     true
 );
+
+// Middleware CORS
+$app->add(CorsMiddleware::class);
+$app->addBodyParsingMiddleware();
 
 $errorHandler = new JsonErrorHandler($app, $settings['displayErrorDetails']);
 $errorMiddleware->setDefaultErrorHandler($errorHandler);

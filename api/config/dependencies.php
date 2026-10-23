@@ -38,6 +38,7 @@ return [
     JaugeRepositoryInterface::class => function (ContainerInterface $c) {
         return new PDOJaugeRepository($c->get(\PDO::class));
     },
+    
 
     'settings' => function(ContainerInterface $c) {
         $settings = require __DIR__ . '/settings.php';
@@ -53,4 +54,6 @@ return [
     },
     \nrv\core\application\ports\CommandeRepositoryInterface::class => \DI\autowire(\nrv\infrastructure\repositories\PDOCommandeRepository::class),
     \nrv\core\application\ports\BilletRepositoryInterface::class => \DI\autowire(\nrv\infrastructure\repositories\PDOBilletRepository::class),
+    \nrv\core\application\ports\AuthTokenProviderInterface::class => \DI\autowire(\nrv\infrastructure\auth\JWTTokenProvider::class),
+    \nrv\core\application\ports\UtilisateurRepositoryInterface::class => \DI\autowire(\nrv\infrastructure\repositories\PDOUtilisateurRepository::class),
 ];
