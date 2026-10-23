@@ -10,7 +10,7 @@ use nrv\api\actions\PayerCommandeAction;
 use nrv\api\actions\GetBilletAction;
 use nrv\api\actions\GetJaugeAction;
 use nrv\api\actions\SigninAction;
-use nrv\api\actions\SignUpAction;
+use nrv\api\actions\SignupAction;
 
 use nrv\api\middlewares\AuthnMiddleware;
 use nrv\api\middlewares\AuthzAdminMiddleware;
@@ -30,6 +30,6 @@ return function (App $app) {
 
     $app->group('/auth', function ($app) {
         $app->post('/signin', SigninAction::class);
-        $app->post('/register', SignUpAction::class);
+        $app->post('/register', SignupAction::class);
     });
 };
