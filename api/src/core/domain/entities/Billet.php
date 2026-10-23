@@ -23,6 +23,20 @@ class Billet
         public readonly ?string $nomAcheteur = null
     ) {}
 
+    public static function creer(LigneCommande $ligne, int $idCommande): self
+    {
+        return new self(
+            null,
+            null,
+            bin2hex(random_bytes(32)),
+            $ligne->typeBillet,
+            $ligne->categorie,
+            $ligne->prixUnitaire,
+            $idCommande,
+            $ligne->idSoirees
+        );
+    }
+
     public function estUnPass(): bool
     {
         return $this->typeBillet === LigneCommande::PASS_3J;
