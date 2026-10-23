@@ -133,6 +133,20 @@ class ServiceCatalogueTest extends TestCase
         $this->service->getSoiree(99);
     }
 
+    public function testListerSoireesAvecPlacesRestantes(): void
+    {
+        $lieu = new Lieu(1, 'Le Hublot', 'Nancy', 250);
+        $this->soirees->method('findAll')->willReturn([
+            new Soiree(1, 'Nuit Métal', 'Métal', '2027-07-01', '20:30', 250, 100, $lieu),
+            new Soiree(2, 'Blues de minuit', 'Blues', '2027-07-02', '19:00', 250, 250, $lieu),
+        ]);
+
+        $this->assertSame([
+            ['id' => 1, 'nom' => 'Nuit Métal', 'date' => '2027-07-01', 'horaire' => '20:30', 'placesRestantes' => 150],
+            ['id' => 2, 'nom' => 'Blues de minuit', 'date' => '2027-07-02', 'horaire' => '19:00', 'placesRestantes' => 0],
+        ], $this->service->listerSoirees());
+    }
+
     public function testListerStyles(): void
     {
         $this->styles->method('findAll')->willReturn([new Style(1, 'Blues rock'), new Style(2, 'Métal')]);

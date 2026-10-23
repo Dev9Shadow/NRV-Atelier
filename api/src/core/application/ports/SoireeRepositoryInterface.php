@@ -7,4 +7,7 @@ interface SoireeRepositoryInterface
 {
     /** Retourne la soirée avec son lieu et ses spectacles, ou null */
     public function findById(int $id): ?Soiree;
+
+    /** @return Soiree[] */
+    public function findAll(): array;
 }

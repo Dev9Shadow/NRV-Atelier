@@ -47,6 +47,17 @@ class ServiceCatalogue
         return (new SoireeDTO($soiree, $this->tarifRepository->findAll()))->toArray();
     }
 
+    public function listerSoirees(): array
+    {
+        return array_map(fn($s) => [
+            'id' => $s->id,
+            'nom' => $s->nom,
+            'date' => $s->date,
+            'horaire' => $s->heureDebut,
+            'placesRestantes' => $s->placesRestantes(),
+        ], $this->soireeRepository->findAll());
+    }
+
     public function listerStyles(): array
     {
         return array_map(

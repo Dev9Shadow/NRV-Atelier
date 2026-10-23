@@ -14,17 +14,18 @@ class PDOSoireeRepository implements SoireeRepositoryInterface
         private SpectacleRepositoryInterface $spectacleRepository
     ) {}
 
+    private const SELECT = <<<SQL
+        SELECT so.id, so.nom, so.thematique, TO_CHAR(so.date, 'YYYY-MM-DD') AS date,
+               TO_CHAR(so.heure_debut, 'HH24:MI') AS heure_debut,
+               so.nb_places_total, so.nb_places_vendues,
+               l.id AS id_lieu, l.nom AS lieu_nom, l.adresse AS lieu_adresse, l.capacite AS lieu_capacite
+        FROM soiree so
+        JOIN lieu l ON l.id = so.id_lieu
+        SQL;
+
     public function findById(int $id): ?Soiree
     {
-        $stmt = $this->pdo->prepare(<<<SQL
-            SELECT so.id, so.nom, so.thematique, TO_CHAR(so.date, 'YYYY-MM-DD') AS date,
-                   TO_CHAR(so.heure_debut, 'HH24:MI') AS heure_debut,
-                   so.nb_places_total, so.nb_places_vendues,
-                   l.id AS id_lieu, l.nom AS lieu_nom, l.adresse AS lieu_adresse, l.capacite AS lieu_capacite
-            FROM soiree so
-            JOIN lieu l ON l.id = so.id_lieu
-            WHERE so.id = :id
-            SQL);
+        $stmt = $this->pdo->prepare(self::SELECT . ' WHERE so.id = :id');
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 
@@ -33,6 +34,18 @@ class PDOSoireeRepository implements SoireeRepositoryInterface
             return null;
         }
 
+        return $this->hydrater($ligne, $this->spectacleRepository->findBySoiree($id));
+    }
+
+    public function findAll(): array
+    {
+        $stmt = $this->pdo->query(self::SELECT . ' ORDER BY so.date, so.heure_debut');
+
+        return array_map(fn(array $ligne) => $this->hydrater($ligne), $stmt->fetchAll(PDO::FETCH_ASSOC));
+    }
+
+    private function hydrater(array $ligne, array $spectacles = []): Soiree
+    {
         return new Soiree(
             (int)$ligne['id'],
             $ligne['nom'],
@@ -42,7 +55,7 @@ class PDOSoireeRepository implements SoireeRepositoryInterface
             (int)$ligne['nb_places_total'],
             (int)$ligne['nb_places_vendues'],
             new Lieu((int)$ligne['id_lieu'], $ligne['lieu_nom'], $ligne['lieu_adresse'], (int)$ligne['lieu_capacite']),
-            $this->spectacleRepository->findBySoiree($id)
+            $spectacles
         );
     }
 }
