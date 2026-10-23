@@ -69,6 +69,7 @@ export async function initialiserReservation(soiree) {
         try {
             await envoyerJSON('POST', '/panier/lignes', choix);
             message.innerHTML = 'Billets ajoutés. <a href="panier.html">Voir le panier</a>';
+            document.dispatchEvent(new CustomEvent('panier:modifie'));
         } catch (erreur) {
             message.textContent = erreur.message;
         }

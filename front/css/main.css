@@ -98,18 +98,35 @@ a:focus-visible {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 2rem;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
 }
-.site-header__nav a {
+@media (min-width: 48rem) {
+  .site-header__nav ul {
+    gap: 0 2rem;
+  }
+}
+.site-header__nav a, .site-header__deconnexion {
   display: inline-block;
   padding-block: 0.5rem;
   color: #1a1a1a;
   font-weight: 600;
   text-decoration: none;
 }
-.site-header__nav a:hover, .site-header__nav a[aria-current=page] {
+.site-header__nav a:hover, .site-header__nav a[aria-current=page], .site-header__deconnexion:hover, .site-header__deconnexion[aria-current=page] {
   text-decoration: underline;
   text-underline-offset: 0.3em;
+}
+.site-header__deconnexion {
+  border: 0;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.site-header__deconnexion:focus-visible {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 2px;
 }
 
 .site-footer {

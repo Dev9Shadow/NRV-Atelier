@@ -19,6 +19,7 @@ async function afficherPanier() {
     try {
         const { panier } = await getJSON('/panier');
         contenu.innerHTML = rendu('tpl-panier', preparer(panier));
+        document.dispatchEvent(new CustomEvent('panier:modifie'));
     } catch (e) {
         erreur.textContent = e.message;
     }

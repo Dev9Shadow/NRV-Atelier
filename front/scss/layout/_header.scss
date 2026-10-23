@@ -30,10 +30,16 @@
     &__nav ul {
         @include liste-nue;
         display: flex;
-        gap: espace(xl);
+        flex-wrap: wrap;
+        gap: 0 espace(l);
+
+        @include bp(md) {
+            gap: 0 espace(xl);
+        }
     }
 
-    &__nav a {
+    &__nav a,
+    &__deconnexion {
         display: inline-block;
         padding-block: espace(s);
         color: $couleur-texte;
@@ -45,5 +51,14 @@
             text-decoration: underline;
             text-underline-offset: 0.3em;
         }
+    }
+
+    &__deconnexion {
+        border: 0;
+        background: none;
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        @include focus-visible;
     }
 }

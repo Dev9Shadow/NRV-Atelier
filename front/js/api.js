@@ -10,8 +10,8 @@ export class ApiError extends Error {
     }
 }
 
-export async function getJSON(chemin) {
-    return USE_MOCKS ? getMock(chemin) : appelerApi('GET', chemin);
+export async function getJSON(chemin, { rediriger = true } = {}) {
+    return USE_MOCKS ? getMock(chemin) : appelerApi('GET', chemin, undefined, rediriger);
 }
 
 export async function envoyerJSON(methode, chemin, corps) {
@@ -34,7 +34,7 @@ export function effacerSession() {
     sessionStorage.removeItem(CLE_UTILISATEUR);
 }
 
-async function appelerApi(methode, chemin, corps) {
+async function appelerApi(methode, chemin, corps, rediriger = true) {
     const headers = { Accept: 'application/json' };
     const session = lireSession();
     if (session) headers.Authorization = `Bearer ${session.token}`;
@@ -53,6 +53,9 @@ async function appelerApi(methode, chemin, corps) {
 
     if (response.status === 401 && !chemin.startsWith('/auth/')) {
         effacerSession();
+    }
+
+    if (response.status === 401 && rediriger && !chemin.startsWith('/auth/')) {
         const retour = window.location.pathname.split('/').pop() + window.location.search;
         window.location.href = `connexion.html?retour=${encodeURIComponent(retour)}`;
     }
