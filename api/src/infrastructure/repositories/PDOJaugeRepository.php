@@ -20,7 +20,7 @@ class PDOJaugeRepository implements JaugeRepositoryInterface
         $sql = "
             SELECT s.id, s.nom AS titre, s.date, s.heure_debut AS horaire,
                    s.nb_places_total AS capacite, s.nb_places_vendues AS places_vendues,
-                   COALESCE(SUM(b.prix), 0) AS recette
+                   ROUND(COALESCE(SUM(CASE WHEN b.type_billet = 'PASS_3J' THEN b.prix / 3 ELSE b.prix END), 0), 2) AS recette
             FROM soiree s
             LEFT JOIN billet_soiree bs ON bs.id_soiree = s.id
             LEFT JOIN billet b ON b.id = bs.id_billet
@@ -33,9 +33,6 @@ class PDOJaugeRepository implements JaugeRepositoryInterface
 
         $jauges = [];
         foreach ($results as $row) {
-            if ($row['recette'] == 0 && $row['places_vendues'] > 0) {
-                $row['recette'] = $row['places_vendues'] * 15.00; // Tarif unitaire moyen de test
-            }
             $jauges[] = new JaugeSoireeDTO($row);
         }
 
