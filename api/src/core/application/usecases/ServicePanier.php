@@ -41,6 +41,35 @@ class ServicePanier
         return $this->enTableau($panier);
     }
 
+    public function modifierQuantite(int $idUtilisateur, int $idLigne, int $quantite): array
+    {
+        LigneCommande::validerQuantite($quantite);
+        $panier = $this->panierDe($idUtilisateur);
+        $panier->ligne($idLigne)->quantite = $quantite;
+        $this->verifierPlaces($panier);
+
+        $this->commandeRepository->modifierQuantite($idLigne, $quantite);
+
+        return $this->enTableau($panier);
+    }
+
+    public function supprimerLigne(int $idUtilisateur, int $idLigne): void
+    {
+        $this->panierDe($idUtilisateur)->ligne($idLigne);
+        $this->commandeRepository->supprimerLigne($idLigne);
+    }
+
+    public function valider(int $idUtilisateur): array
+    {
+        $panier = $this->panierDe($idUtilisateur);
+        $this->verifierPlaces($panier);
+        $panier->valider();
+
+        $this->commandeRepository->changerStatut($panier->id, $panier->statut);
+
+        return $this->enTableau($panier);
+    }
+
     private function panierDe(int $idUtilisateur): Commande
     {
         return $this->commandeRepository->findPanierByUtilisateur($idUtilisateur)

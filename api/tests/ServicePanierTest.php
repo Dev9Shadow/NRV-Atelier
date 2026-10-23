@@ -12,6 +12,7 @@ use nrv\core\domain\entities\Soiree;
 use nrv\core\domain\entities\Tarif;
 use nrv\core\domain\exceptions\EntityNotFoundException;
 use nrv\core\domain\exceptions\PlacesInsuffisantesException;
+use nrv\core\domain\exceptions\TransitionStatutException;
 use nrv\core\domain\exceptions\ValidationException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -107,5 +108,98 @@ class ServicePanierTest extends TestCase
 
         $this->expectException(EntityNotFoundException::class);
         $this->service->ajouterLigne(3, LigneCommande::SIMPLE, Tarif::NORMAL, [99], 1);
+    }
+
+    private function panierDeDeuxLignes(): Commande
+    {
+        $simple = LigneCommande::creer(LigneCommande::SIMPLE, new Tarif(Tarif::NORMAL, 35.0), [4], 1);
+        $simple->id = 1;
+        $pass = LigneCommande::creer(LigneCommande::PASS_3J, new Tarif(Tarif::REDUIT, 25.0), [1, 2, 3], 1);
+        $pass->id = 2;
+        return $this->panierAvec([$simple, $pass]);
+    }
+
+    public function testModifierQuantiteMetAJourLeTotal(): void
+    {
+        $this->commandes->method('findPanierByUtilisateur')->willReturn($this->panierDeDeuxLignes());
+        $this->commandes->expects($this->once())->method('modifierQuantite')->with(2, 3);
+
+        $panier = $this->service->modifierQuantite(3, 2, 3);
+
+        $this->assertSame(3, $panier['lignes'][1]['quantite']);
+        $this->assertSame(253.25, $panier['montantTotal']);
+    }
+
+    public function testModifierQuantiteRefuseSiPlusAssezDePlaces(): void
+    {
+        $this->commandes->method('findPanierByUtilisateur')->willReturn($this->panierDeDeuxLignes());
+        $this->commandes->expects($this->never())->method('modifierQuantite');
+
+        $this->expectException(PlacesInsuffisantesException::class);
+        $this->service->modifierQuantite(3, 1, 4);
+    }
+
+    public function testModifierQuantiteNulleRefusee(): void
+    {
+        $this->commandes->expects($this->never())->method('modifierQuantite');
+
+        $this->expectException(ValidationException::class);
+        $this->service->modifierQuantite(3, 1, 0);
+    }
+
+    public function testModifierUneLigneHorsDuPanierRefuse(): void
+    {
+        $this->commandes->method('findPanierByUtilisateur')->willReturn($this->panierDeDeuxLignes());
+        $this->commandes->expects($this->never())->method('modifierQuantite');
+
+        $this->expectException(EntityNotFoundException::class);
+        $this->service->modifierQuantite(3, 99, 1);
+    }
+
+    public function testSupprimerUneLigneDuPanier(): void
+    {
+        $this->commandes->method('findPanierByUtilisateur')->willReturn($this->panierDeDeuxLignes());
+        $this->commandes->expects($this->once())->method('supprimerLigne')->with(2);
+
+        $this->service->supprimerLigne(3, 2);
+    }
+
+    public function testSupprimerUneLigneHorsDuPanierRefuse(): void
+    {
+        $this->commandes->method('findPanierByUtilisateur')->willReturn($this->panierDeDeuxLignes());
+        $this->commandes->expects($this->never())->method('supprimerLigne');
+
+        $this->expectException(EntityNotFoundException::class);
+        $this->service->supprimerLigne(3, 99);
+    }
+
+    public function testValiderPasseLePanierAuStatutValidee(): void
+    {
+        $this->commandes->method('findPanierByUtilisateur')->willReturn($this->panierDeDeuxLignes());
+        $this->commandes->expects($this->once())->method('changerStatut')->with(12, Commande::VALIDEE);
+
+        $commande = $this->service->valider(3);
+
+        $this->assertSame('VALIDEE', $commande['statut']);
+        $this->assertSame(107.75, $commande['montantTotal']);
+    }
+
+    public function testValiderUnPanierVideRefuse(): void
+    {
+        $this->commandes->method('findPanierByUtilisateur')->willReturn($this->panierAvec());
+        $this->commandes->expects($this->never())->method('changerStatut');
+
+        $this->expectException(TransitionStatutException::class);
+        $this->service->valider(3);
+    }
+
+    public function testValiderRefuseSiDesPlacesOntEteVenduesEntreTemps(): void
+    {
+        $this->commandes->method('findPanierByUtilisateur')->willReturn($this->panierDeDeuxLignes());
+        $this->placesRestantes[4] = 0;
+        $this->commandes->expects($this->never())->method('changerStatut');
+
+        $this->expectException(PlacesInsuffisantesException::class);
+        $this->service->valider(3);
     }
 }
