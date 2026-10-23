@@ -2,7 +2,8 @@
 @use "../abstracts/mixins" as *;
 
 .programme,
-.soiree {
+.soiree,
+.connexion {
     @include conteneur;
     padding-block: espace(l) espace(xxl);
 
@@ -22,4 +23,20 @@
 .titre-page {
     text-transform: uppercase;
     margin-bottom: espace(l);
+}
+
+.connexion {
+    @include grille-adaptative((lg: 2), espace(xl));
+    align-items: start;
+
+    .titre-page {
+        grid-column: 1 / -1;
+        margin-bottom: 0;
+    }
+
+    .form-container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+    }
 }

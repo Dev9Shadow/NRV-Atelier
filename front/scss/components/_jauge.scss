@@ -1,7 +1,8 @@
+@use "../abstracts/mixins" as *;
+
 .admin-jauge-container {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 1rem;
+    @include conteneur;
+    padding-block: espace(l) espace(xxl);
 
     h1, h2 {
         color: #333;
