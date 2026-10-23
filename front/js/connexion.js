@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     window.location.href = retour;
                 }
             } catch (err) {
-                errorDiv.textContent = "Identifiants incorrects.";
+                errorDiv.textContent = err.message || "Identifiants incorrects.";
                 errorDiv.classList.add('visible');
             }
         });
@@ -30,16 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const nom = document.getElementById('register-nom').value;
+            const prenom = document.getElementById('register-prenom').value;
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
             const errorDiv = document.getElementById('register-error');
 
             try {
-                await inscrire(nom, email, password);
+                await inscrire(nom, prenom, email, password);
                 await connecter(email, password);
                 window.location.href = retour;
             } catch (err) {
-                errorDiv.textContent = "Erreur lors de l'inscription.";
+                errorDiv.textContent = err.message || "Erreur lors de l'inscription.";
                 errorDiv.classList.add('visible');
             }
         });

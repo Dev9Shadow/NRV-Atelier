@@ -1,12 +1,13 @@
-import { apiRequest } from './api.js';
+import { envoyerJSON, ecrireSession, effacerSession, lireSession } from './api.js';
 
 export async function connecter(email, password) {
     try {
-        const data = await apiRequest('/login', 'POST', { email, password });
+        const data = await envoyerJSON('POST', '/auth/signin', { email, password });
         if (data && data.token) {
-            localStorage.setItem('jwt_token', data.token);
-            localStorage.setItem('user_name', data.nom || email);
-            localStorage.setItem('user_role', data.role || 'user');
+            ecrireSession(data.token, {
+                nom: data.nom || email,
+                role: data.role || 'USER'
+            });
             return true;
         }
         return false;
@@ -16,9 +17,9 @@ export async function connecter(email, password) {
     }
 }
 
-export async function inscrire(nom, email, password) {
+export async function inscrire(nom, prenom, email, password) {
     try {
-        const data = await apiRequest('/register', 'POST', { nom, email, password });
+        const data = await envoyerJSON('POST', '/auth/signup', { nom, prenom, email, password });
         return data;
     } catch (error) {
         console.error('Erreur d\'inscription:', error);
@@ -27,20 +28,20 @@ export async function inscrire(nom, email, password) {
 }
 
 export function deconnecter() {
-    localStorage.removeItem('jwt_token');
-    localStorage.removeItem('user_name');
-    localStorage.removeItem('user_role');
+    effacerSession();
     window.location.href = 'index.html';
 }
 
 export function estAdmin() {
-    return localStorage.getItem('user_role') === 'admin';
+    const session = lireSession();
+    return session && session.utilisateur && session.utilisateur.role === 'ADMIN';
 }
 
 export function utilisateurConnecte() {
-    return localStorage.getItem('jwt_token') !== null;
+    return lireSession() !== null;
 }
 
 export function getNomUtilisateur() {
-    return localStorage.getItem('user_name');
+    const session = lireSession();
+    return session && session.utilisateur ? session.utilisateur.nom : null;
 }
