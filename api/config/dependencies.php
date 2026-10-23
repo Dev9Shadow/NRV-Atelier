@@ -6,11 +6,14 @@ use nrv\core\application\ports\SpectacleRepositoryInterface;
 use nrv\core\application\ports\SoireeRepositoryInterface;
 use nrv\core\application\ports\StyleRepositoryInterface;
 use nrv\core\application\ports\TarifRepositoryInterface;
+use nrv\core\application\ports\JaugeRepositoryInterface;
 
 use nrv\infrastructure\repositories\PDOSpectacleRepository;
 use nrv\infrastructure\repositories\PDOSoireeRepository;
 use nrv\infrastructure\repositories\PDOStyleRepository;
-use nrv\infrastructure\repositories\PDOTarifRepository; 
+use nrv\infrastructure\repositories\PDOTarifRepository;
+use nrv\infrastructure\repositories\PDOJaugeRepository; 
+
 
 return [
     SpectacleRepositoryInterface::class => function(ContainerInterface $c) {
@@ -30,6 +33,10 @@ return [
 
     TarifRepositoryInterface::class => function(ContainerInterface $c) {
         return new PDOTarifRepository($c->get(PDO::class));
+    },
+
+    JaugeRepositoryInterface::class => function (ContainerInterface $c) {
+        return new PDOJaugeRepository($c->get(\PDO::class));
     },
 
     'settings' => function(ContainerInterface $c) {
