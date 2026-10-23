@@ -10,6 +10,11 @@ use nrv\api\actions\GetCommandeAction;
 use nrv\api\actions\PayerCommandeAction;
 use nrv\api\actions\GetBilletAction;
 use nrv\api\actions\GetJaugeAction;
+use nrv\api\actions\GetPanierAction;
+use nrv\api\actions\AjouterLignePanierAction;
+use nrv\api\actions\ModifierLignePanierAction;
+use nrv\api\actions\SupprimerLignePanierAction;
+use nrv\api\actions\ValiderPanierAction;
 use nrv\api\actions\SigninAction;
 use nrv\api\actions\SignupAction;
 
@@ -26,6 +31,14 @@ return function (App $app) {
     $app->post('/commandes/{id:[0-9]+}/paiement', PayerCommandeAction::class)->add(AuthnMiddleware::class);
     $app->get('/billets/{token:[a-f0-9]{64}}', GetBilletAction::class);
     
+    $app->group('/panier', function ($app) {
+        $app->get('', GetPanierAction::class);
+        $app->post('/lignes', AjouterLignePanierAction::class);
+        $app->patch('/lignes/{id:[0-9]+}', ModifierLignePanierAction::class);
+        $app->delete('/lignes/{id:[0-9]+}', SupprimerLignePanierAction::class);
+        $app->post('/validation', ValiderPanierAction::class);
+    })->add(AuthnMiddleware::class);
+
     $app->group('/admin', function ($app) {
         $app->get('/soirees', GetJaugeAction::class);
     })->add(AuthzAdminMiddleware::class)->add(AuthnMiddleware::class);
