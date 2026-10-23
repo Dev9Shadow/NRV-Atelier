@@ -1,45 +1,51 @@
+@use "../abstracts/variables" as *;
+@use "../abstracts/mixins" as *;
+
 .form-container {
-    max-width: 450px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 28rem;
+    margin: espace(xl) auto;
+    padding: espace(xl);
+    border: 1.5px solid $couleur-texte;
+    border-radius: $rayon;
+    background: $couleur-fond;
 
     h2 {
-        margin-bottom: 1.5rem;
+        margin-bottom: espace(l);
         text-align: center;
-        color: #333;
+        text-transform: uppercase;
     }
 
     .form-group {
-        margin-bottom: 1.2rem;
+        margin-bottom: 1.25rem;
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: espace(s);
             font-weight: 600;
-            color: #555;
+            color: $couleur-texte-doux;
         }
 
         input {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 1rem;
+            min-height: 2.75rem;
+            padding: 0 espace(m);
+            border: 1.5px solid $couleur-trait;
+            border-radius: $rayon-petit;
+            font: inherit;
+            transition: border-color $transition;
+            @include focus-visible;
 
             &:focus {
-                border-color: #007bff;
-                outline: none;
+                border-color: $couleur-texte;
             }
         }
 
         .error-message {
-            color: #dc3545;
-            font-size: 0.85rem;
-            margin-top: 0.25rem;
             display: none;
+            margin-top: espace(xs);
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: $couleur-erreur;
 
             &.visible {
                 display: block;
@@ -49,17 +55,20 @@
 
     button {
         width: 100%;
-        padding: 0.75rem;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 1rem;
+        min-height: 2.75rem;
+        border: 1.5px solid $couleur-texte;
+        border-radius: $rayon-petit;
+        background: $couleur-texte;
+        color: $couleur-fond;
+        font: inherit;
+        font-weight: 700;
         cursor: pointer;
-        transition: background-color 0.2s;
+        transition: background $transition, color $transition;
+        @include focus-visible;
 
         &:hover {
-            background-color: #0056b3;
+            background: $couleur-fond;
+            color: $couleur-texte;
         }
     }
 }

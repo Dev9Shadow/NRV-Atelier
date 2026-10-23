@@ -1,4 +1,3 @@
-@charset "UTF-8";
 *,
 *::before,
 *::after {
@@ -1021,60 +1020,72 @@ a:focus-visible {
   }
 }
 .form-container {
-  max-width: 450px;
+  max-width: 28rem;
   margin: 2rem auto;
   padding: 2rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1.5px solid #1a1a1a;
+  border-radius: 0.5rem;
+  background: #ffffff;
 }
 .form-container h2 {
   margin-bottom: 1.5rem;
   text-align: center;
-  color: #333;
+  text-transform: uppercase;
 }
 .form-container .form-group {
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.25rem;
 }
 .form-container .form-group label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 600;
-  color: #555;
+  color: #6b6b6b;
 }
 .form-container .form-group input {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
+  min-height: 2.75rem;
+  padding: 0 1rem;
+  border: 1.5px solid #c9c9c9;
+  border-radius: 0.25rem;
+  font: inherit;
+  transition: border-color 0.2s ease;
+}
+.form-container .form-group input:focus-visible {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 2px;
 }
 .form-container .form-group input:focus {
-  border-color: #007bff;
-  outline: none;
+  border-color: #1a1a1a;
 }
 .form-container .form-group .error-message {
-  color: #dc3545;
-  font-size: 0.85rem;
-  margin-top: 0.25rem;
   display: none;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #b3261e;
 }
 .form-container .form-group .error-message.visible {
   display: block;
 }
 .form-container button {
   width: 100%;
-  padding: 0.75rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  min-height: 2.75rem;
+  border: 1.5px solid #1a1a1a;
+  border-radius: 0.25rem;
+  background: #1a1a1a;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.form-container button:focus-visible {
+  outline: 2px solid #1a1a1a;
+  outline-offset: 2px;
 }
 .form-container button:hover {
-  background-color: #0056b3;
+  background: #ffffff;
+  color: #1a1a1a;
 }
 
 .paiement {
@@ -1252,109 +1263,114 @@ a:focus-visible {
 .admin-jauge-container {
   padding-block: 1.5rem 3rem;
 }
-.admin-jauge-container h1, .admin-jauge-container h2 {
-  color: #333;
+.admin-jauge-container h1,
+.admin-jauge-container h2 {
   margin-bottom: 1rem;
+  text-transform: uppercase;
 }
 .admin-jauge-container .total-card {
-  background: #f8f9fa;
-  padding: 1.5rem;
-  border-radius: 8px;
   margin-bottom: 2rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  font-size: 1.1rem;
-  font-weight: bold;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background: #f2f2f2;
+  font-size: 1.125rem;
+  font-weight: 700;
 }
 .admin-jauge-container .access-denied {
+  padding: 3rem 1.5rem;
+  border-left: 4px solid #b3261e;
+  border-radius: 0.25rem;
+  background: #f2f2f2;
   text-align: center;
-  padding: 3rem;
-  background: #fff3f3;
-  border: 1px solid #f5c6cb;
-  border-radius: 8px;
-  color: #721c24;
 }
 .admin-jauge-container .access-denied a {
   display: inline-block;
   margin-top: 1rem;
-  color: #007bff;
-  text-decoration: underline;
-}
-.admin-jauge-container {
-  /* Tableau Desktop par défaut */
+  font-weight: 700;
+  color: #1a1a1a;
 }
 .admin-jauge-container .jauge-table {
   width: 100%;
   border-collapse: collapse;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
-.admin-jauge-container .jauge-table th, .admin-jauge-container .jauge-table td {
+.admin-jauge-container .jauge-table thead {
+  display: none;
+}
+.admin-jauge-container .jauge-table tbody,
+.admin-jauge-container .jauge-table tr,
+.admin-jauge-container .jauge-table td {
+  display: block;
+  width: 100%;
+}
+.admin-jauge-container .jauge-table tr {
+  margin-bottom: 1rem;
   padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  background: #f2f2f2;
 }
-.admin-jauge-container .jauge-table th {
-  background-color: #343a40;
-  color: white;
+.admin-jauge-container .jauge-table td {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0;
 }
-.admin-jauge-container {
-  /* Barre de progression de remplissage */
+.admin-jauge-container .jauge-table td::before {
+  content: attr(data-label);
+  font-weight: 700;
+  color: #6b6b6b;
 }
-.admin-jauge-container .progress-bar-container {
-  background: #e9ecef;
-  border-radius: 4px;
-  overflow: hidden;
-  height: 20px;
-  width: 100%;
-  position: relative;
-}
-.admin-jauge-container .progress-bar-container .progress-fill {
-  background-color: #28a745;
-  height: 100%;
-  transition: width 0.3s ease;
-}
-.admin-jauge-container .progress-bar-container .progress-text {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  top: 0;
-  left: 0;
-  font-size: 0.85rem;
-  color: #333;
-  font-weight: bold;
-}
-
-/* Version Mobile : Transformation en cartes (grid) */
-@media (max-width: 768px) {
-  .admin-jauge-container .jauge-table,
-  .admin-jauge-container .jauge-table tbody,
-  .admin-jauge-container .jauge-table tr,
-  .admin-jauge-container .jauge-table td {
-    display: block;
-    width: 100%;
-  }
+@media (min-width: 48rem) {
   .admin-jauge-container .jauge-table thead {
-    display: none; /* Cache l'en-tête du tableau sur mobile */
+    display: table-header-group;
+  }
+  .admin-jauge-container .jauge-table tbody {
+    display: table-row-group;
   }
   .admin-jauge-container .jauge-table tr {
-    background: #fff;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: table-row;
+    margin: 0;
+    padding: 0;
+    background: none;
   }
+  .admin-jauge-container .jauge-table th,
   .admin-jauge-container .jauge-table td {
-    padding: 0.5rem 0;
-    border: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: table-cell;
+    width: auto;
+    padding: 1rem;
+    border-bottom: 1px solid #c9c9c9;
+    text-align: left;
   }
   .admin-jauge-container .jauge-table td::before {
-    content: attr(data-label);
-    font-weight: bold;
-    color: #555;
+    content: none;
   }
+  .admin-jauge-container .jauge-table th {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+}
+.admin-jauge-container .progress-bar-container {
+  position: relative;
+  flex: 1 1 8rem;
+  width: 100%;
+  min-width: 8rem;
+  height: 1.25rem;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  background: #c9c9c9;
+}
+.admin-jauge-container .progress-fill {
+  height: 100%;
+  background: #1a1a1a;
+  transition: width 0.2s ease;
+}
+.admin-jauge-container .progress-text {
+  position: absolute;
+  inset: 0;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.25rem;
+  text-align: center;
+  color: #ffffff;
+  mix-blend-mode: difference;
 }
