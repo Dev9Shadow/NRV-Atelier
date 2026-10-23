@@ -1,0 +1,37 @@
+{
+    "type": "resource",
+    "panier": {
+        "id": 12,
+        "statut": "PANIER",
+        "montantTotal": 142.75,
+        "lignes": [
+            {
+                "id": 3,
+                "typeBillet": "SIMPLE",
+                "categorie": "NORMAL",
+                "quantite": 2,
+                "prixUnitaire": 35.0,
+                "sousTotal": 70.0,
+                "soirees": [
+                    { "id": 1, "nom": "Nuit Métal #1", "date": "2027-07-01" }
+                ],
+                "links": { "self": { "href": "/panier/lignes/3" } }
+            },
+            {
+                "id": 4,
+                "typeBillet": "PASS_3J",
+                "categorie": "REDUIT",
+                "quantite": 1,
+                "prixUnitaire": 72.75,
+                "sousTotal": 72.75,
+                "soirees": [
+                    { "id": 1, "nom": "Nuit Métal #1", "date": "2027-07-01" },
+                    { "id": 2, "nom": "Nuit Hard rock #2", "date": "2027-07-02" },
+                    { "id": 3, "nom": "Nuit Blues rock #3", "date": "2027-07-03" }
+                ],
+                "links": { "self": { "href": "/panier/lignes/4" } }
+            }
+        ]
+    },
+    "links": { "self": { "href": "/panier" }, "validation": { "href": "/panier/validation" } }
+}

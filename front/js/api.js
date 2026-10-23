@@ -15,7 +15,7 @@ export async function getJSON(chemin) {
 }
 
 export async function envoyerJSON(methode, chemin, corps) {
-    return appelerApi(methode, chemin, corps);
+    return USE_MOCKS ? getMock(chemin) : appelerApi(methode, chemin, corps);
 }
 
 export function lireSession() {
@@ -82,7 +82,9 @@ async function getMock(chemin) {
         case 'styles':
             return chargerMock('styles.json');
         case 'soirees':
-            return chargerMock(`soiree-${id}.json`);
+            return chargerMock(id ? `soiree-${id}.json` : 'soirees.json');
+        case 'panier':
+            return chargerMock('panier.json');
         case 'spectacles':
             return filtrerSpectaclesMock(await chargerMock('spectacles.json'), url.searchParams, chemin);
         default:

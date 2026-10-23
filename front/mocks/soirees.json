@@ -1,0 +1,19 @@
+{
+    "type": "collection",
+    "count": 3,
+    "soirees": [
+        {
+            "soiree": { "id": 1, "nom": "Nuit Métal #1", "date": "2027-07-01", "horaire": "20:30", "placesRestantes": 848 },
+            "links": { "self": { "href": "/soirees/1" } }
+        },
+        {
+            "soiree": { "id": 2, "nom": "Nuit Hard rock #2", "date": "2027-07-02", "horaire": "19:00", "placesRestantes": 417 },
+            "links": { "self": { "href": "/soirees/2" } }
+        },
+        {
+            "soiree": { "id": 3, "nom": "Nuit Blues rock #3", "date": "2027-07-03", "horaire": "19:00", "placesRestantes": 185 },
+            "links": { "self": { "href": "/soirees/3" } }
+        }
+    ],
+    "links": { "self": { "href": "/soirees" } }
+}
